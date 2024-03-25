@@ -1,0 +1,24 @@
+#carForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 35%;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+
+.data-card label {
+  padding-top: 15px;
+
+}
+
+.data-card input {
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+}

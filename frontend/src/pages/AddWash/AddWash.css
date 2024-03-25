@@ -1,0 +1,60 @@
+#add-washForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 35%;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+
+.add-wash-card {
+  position: relative;
+}
+
+.add-wash-card label,
+.add-hour-wash-card label{
+  padding-top: 15px;
+}
+
+.add-wash-card input,
+.add-wash-card select,
+.add-hour-wash-card select {
+  width: 195px;
+  border-radius: 10px;
+  padding: 7px;
+  background-color: #8FF2FF;
+  border: 1px solid #000;
+  color: #000;
+  margin-bottom: .6em;
+}
+
+.add-wash-card select {
+  width: 210px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.add-hour-wash-card select {
+  width: 210px;
+}
+
+/* Estilizar a seta em navegadores que não suportam 'appearance: none' */
+.add-wash-card select::-ms-expand {
+  display: none;
+}
+
+.add-wash-card input::placeholder{
+  color: #000;
+  opacity: 1;
+}
+
+.selected-hour {
+  background-color: black;
+  color: white; /* Define a cor do texto para garantir a legibilidade */
+}

@@ -1,0 +1,252 @@
+#home {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.home-title {
+  padding: 10px;
+}
+
+.home-options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.home-options select {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  font-size: 0.97em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  text-transform: capitalize;
+}
+
+.select, .select2  {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(45deg, #d8f7fa, #BCF7FF, #d8f7fa);
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+select:hover {
+  background-color: #000;
+  color: #BCF7FF;
+  border: 1px solid #BCF7FF;
+  border-radius: 10px;
+}
+
+.select select, 
+.select2 select {
+  border-radius: 10px;
+  height: 30px;
+  padding: 3px;
+}
+
+.home-card {
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 0.80em;
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  text-transform: capitalize;
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.home-profile {
+  display: flex;
+  align-items: flex-start;
+  font-weight: bold;
+}
+
+.home-profile .img {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.home-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-profile p {
+  margin: 0;
+  margin-top: 7px;
+}
+
+.home-assets { 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-note {
+  position: absolute;
+  top: 8px;
+  right: 9%;
+}
+
+.home-price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #BCF7FF;
+  padding: 8px 17px 6px 8px;
+  border-top-right-radius: 10px;
+  font-size: 1.2em;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.home-assets-buttons {
+  display: flex;
+  justify-content: flex-end;
+  color: black;
+}
+
+.home-assets-detail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-assets-detail span {
+  font-weight: bold;
+}
+
+.button-assessment,
+.button-wash {
+  padding: 5px;
+  margin-left: 10px;
+  width: 110px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.name {
+  font-size: 1.5em;
+}
+
+.popup-home {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+  z-index: 999;
+}
+
+.popup-home button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.overlay-home {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(22, 22, 22, 0.959); /* Cinza claro com opacidade */
+  z-index: 998;
+}
+
+.date-input {
+  position: relative;
+}
+
+.date-input input {
+  border-radius: 10px;
+  padding: 7px;
+  background-color: #8FF2FF;
+  border: 1px solid #000;
+  color: #000;
+  margin-bottom: .6em;
+}
+
+.popup-content-date span {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+.date-icon {
+  position: absolute;
+  top: 18%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.overlay-date {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(22, 22, 22, 0.959); /* Cinza claro com opacidade */
+  z-index: 999;
+}
+
+.popup-date {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #BCF7FF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.popup-content-date {
+  background-color: #fff;
+  height: 85%;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+ 
+.popup-content-date input {
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.button-date {
+  padding-top: 10px;
+}

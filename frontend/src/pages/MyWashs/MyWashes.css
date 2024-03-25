@@ -1,0 +1,68 @@
+.wash-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.wash-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.wash-card {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #000;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+
+.wash-card p {
+  font-weight: bold;
+  padding-top: 3px;
+}
+
+.wash-info,
+.wash-car {
+  display: flex;
+  justify-content: center;
+  text-transform: capitalize;
+  flex-direction: column;
+}
+
+
+.wash-info p,
+.wash-car p {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.wash-price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #BCF7FF;
+  padding: 8px 17px 6px 8px;
+  border-top-right-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.wash-date {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.wash-card .delete-button {
+  position: absolute;
+  top: 2px;
+  right: 70px;
+}

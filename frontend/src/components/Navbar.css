@@ -1,0 +1,48 @@
+#nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #BCF7FF;
+  border-bottom: 1px solid #000;
+  padding: 0.6em 1em;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.719);
+}
+
+#nav-links {
+  display: flex;
+  align-items: center;
+}
+
+#nav-links li {
+  margin-right: 1em;
+}
+
+#nav-links span {
+  cursor: pointer;
+}
+
+#nav-links svg{
+  font-size: 1.5em;
+}
+
+nav span {
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgb(0, 0, 0);
+  padding: 5px;
+  background-color: #8FF2FF;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+nav span:hover {
+  border-radius: 10px;
+  background-color: #000000;
+  color: #8FF2FF;
+  border: 1px solid #8FF2FF;
+  display: fixed;
+}
+
+#nav a img {
+  width: 70px;
+}
