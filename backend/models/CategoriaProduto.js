@@ -4,6 +4,7 @@ const sequelize = require('../config/db'); // Atualize o caminho conforme necess
 const CategoriaProduto = sequelize.define('CategoriaProduto', {
   id_categoria: {
     type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     allowNull: false
   },
