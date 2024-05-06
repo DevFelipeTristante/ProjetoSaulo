@@ -14,7 +14,7 @@ router.post("/", insertCategoriaProdutoValidation(), insertCategoriaProduto)
 const validate = require ("../middlewares/handleValidation")
 
 // Routes 
-router.post("/", validate, insertCategoriaProdutoValidation(), insertCategoriaProduto)
+router.post("/", insertCategoriaProdutoValidation(), validate, insertCategoriaProduto)
 // router.delete("/:id", authGuard, deleteCar)
 // router.get("/", authGuard, getAllCars)
 // router.get("/user/:id", getUserCars)
