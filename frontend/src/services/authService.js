@@ -5,12 +5,12 @@ const register = async(data) => {
   const config = requestConfig("POST", data)
 
   try {
-    const res = await fetch(api + "/users/register", config)
+    const res = await fetch(api + "/usuario/register", config)
       .then((res) => res.json())
       .catch((err) => err)
 
-    if(res._id) {
-      localStorage.setItem("user", JSON.stringify(res))
+    if(res.id_usuario) {
+      localStorage.setItem("usuario", JSON.stringify(res))
     }
 
     return res
@@ -21,7 +21,7 @@ const register = async(data) => {
 
 // Logout an user 
 const logout = () => {
-  localStorage.removeItem("user")
+  localStorage.removeItem("usuario")
 }
 
 // Sign in an user
@@ -29,12 +29,12 @@ const login = async(data) => {
   const config = requestConfig("POST", data)
 
   try {
-    const res = await fetch(api + "/users/login", config)
+    const res = await fetch(api + "/usuario/login", config)
       .then((res) => res.json())
       .catch((err) => err)
 
-    if(res._id) {
-      localStorage.setItem("user", JSON.stringify(res))
+    if(res.id_usuario) {
+      localStorage.setItem("usuario", JSON.stringify(res))
     }
 
     return res

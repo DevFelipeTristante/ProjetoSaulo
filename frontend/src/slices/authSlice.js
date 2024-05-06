@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../services/authService";
 
-const user = JSON.parse(localStorage.getItem("user"))
+const usuario = JSON.parse(localStorage.getItem("usuario"))
 
 const initialState = {
-  user: user ? user : null,
+  usuario: usuario ? usuario : null,
   error: false,
   success: false,
   loading: false,
@@ -13,8 +13,8 @@ const initialState = {
 // Register an user and sign in
 export const register = createAsyncThunk(
   "auth/register",
-  async (user, thunkAPI) => {
-    const data = await authService.register(user)
+  async (usuario, thunkAPI) => {
+    const data = await authService.register(usuario)
 
     // check for errors
     if(data.errors) {
@@ -33,8 +33,8 @@ export const logout = createAsyncThunk("auth/logout", async() => {
 // Sign in an user
 export const login = createAsyncThunk(
   "auth/login",
-  async (user, thunkAPI) => {
-    const data = await authService.login(user)
+  async (usuario, thunkAPI) => {
+    const data = await authService.login(usuario)
 
     // check for errors
     if(data.errors) {
@@ -65,18 +65,18 @@ export const authSlice = createSlice({
       state.loading = false
       state.success = true
       state.error = null
-      state.user = action.payload
+      state.usuario = action.payload
     })
     .addCase(register.rejected, (state, action) => {
       state.loading = false
       state.error = action.payload
-      state.user = null
+      state.usuario = null
     })
     .addCase(logout.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
       state.error = null
-      state.user = null
+      state.usuario = null
     })
     .addCase(login.pending, (state) => {
       state.loading = true
@@ -86,12 +86,12 @@ export const authSlice = createSlice({
       state.loading = false
       state.success = true
       state.error = null
-      state.user = action.payload
+      state.usuario = action.payload
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false
       state.error = action.payload
-      state.user = null
+      state.usuario = null
     })
   }
 })
