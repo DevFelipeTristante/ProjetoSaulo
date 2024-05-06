@@ -3,6 +3,7 @@ const router = express()
 
 router.use("/api/categoria", require("./CategoriaProdutoRoutes"))
 router.use("/api/cidades", require("./CidadesRoutes"))
+<<<<<<< HEAD
 router.use("/api/cliente", require("./ClienteRoutes"))
 router.use("/api/conta", require("./ContaRoutes"))
 router.use("/api/empresa", require("./EmpresaRoutes"))
@@ -19,6 +20,8 @@ router.use("/api/telefone", require("./TelefoneRoutes"))
 router.use("/api/tipocliente", require("./TipoClienteRoutes"))
 router.use("/api/usuario", require("./UsuarioRoutes"))
 router.use("/api/venda", require("./VendaRoutes"))
+=======
+>>>>>>> a7a8ff1e26a1cf6b7cddc6c57954a568114e9c12
 
 // test route
 router.get("/", (req, res) => {
