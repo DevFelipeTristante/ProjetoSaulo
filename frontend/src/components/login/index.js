@@ -95,12 +95,12 @@ function Login() {
                 <div className="flex justify-center bg-green-400 w-60 p-2">
                   {!loading && <input type="submit" value="Login" />}
                   {loading && <input type="submit" value="Aguarde..." disabled/>}
-                  {error && <Message msg={error} type="error"/>}
                 </div>
               </button>
             </div>
           </div>
         </div>
+        {error && <Message msg={error} type="error"/>}
         </form>
       </div>
     </div>
