@@ -19,7 +19,7 @@ const getCategorias = async() => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/categoria", config)
+    const res = await fetch(api + "/categoria/get", config)
       .then((res) => res.json())
       .catch((err) => err)
 

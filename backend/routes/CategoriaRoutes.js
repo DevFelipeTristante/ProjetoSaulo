@@ -4,20 +4,19 @@ const router = express.Router()
 // Controller
 const { 
   insertCategoria, 
-  getAllCategorias
+  getAllCategorias,
+  deleteCategoria,
+  getCategoriaById
 } = require("../controllers/CategoriaController")
 
 // Middlewares
 const { insertCategoriaValidation } = require("../middlewares/categoriaValidation")
-const validate = require ("../middlewares/handleValidation")
+const validate = require("../middlewares/handleValidation")
 
 // Routes 
 router.post("/insert", insertCategoriaValidation(), validate, insertCategoria)
-router.get("/", getAllCategorias)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.delete("/delete/:id_categoria", deleteCategoria)
+router.get("/get", getAllCategorias)
+router.get("/get/:id_categoria", getCategoriaById)
 
 module.exports = router
