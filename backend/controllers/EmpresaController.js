@@ -1,12 +1,12 @@
 const Empresa = require('../models/Empresa'); // Atualize o caminho conforme necessário
 
 const insertEmpresa = async (req, res) => {
-  const { cnpj, nome, cidade } = req.body;
+  const { cnpj, nome, id_cidade } = req.body;
 
   try {
     // Create a new Empresa
     const novaEmpresa = await Empresa.create({
-      cnpj, nome, cidade
+      cnpj, nome, id_cidade
     });
 
     // If Empresa was created successfully, return data

@@ -8,14 +8,14 @@ const insertFornecedorValidation = () => {
       .isLength({min: 2})
       .withMessage("O nome do fornecedor precisa ter no mínimo 2 caracteres."),
     body("cidade")
-      .isNumeric()
+      .isInt()
       .withMessage("O ID Cidade é obrigatório.")
       .isLength({min: 1})
       .withMessage("O ID Cidade precisa ter pelo menos 1 dígito.")
       .custom(value => value >= 1)
       .withMessage("O ID Cidade precisa ser maior ou igual a 1."),
     body("cliente")
-      .isNumeric()
+      .isInt()
       .withMessage("O ID Cliente é obrigatório.")
       .isLength({min: 1})
       .withMessage("O ID Cliente precisa ter pelo menos 1 dígito.")

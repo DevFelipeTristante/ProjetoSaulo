@@ -11,10 +11,6 @@ const Usuario = sequelize.define('Usuario', {
     type: DataTypes.STRING,
     allowNull: true
   },
-  senha: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
   id_perfil: {
     type: DataTypes.INTEGER,
     allowNull: true
@@ -22,7 +18,15 @@ const Usuario = sequelize.define('Usuario', {
   comissao: {
     type: DataTypes.DOUBLE(9, 2),
     allowNull: true
-  }  
+  },
+  senha: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
+  id_empresa: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
 }, {
   timestamps: false,
   tableName: 'usuario' // Nome da tabela no banco de dados

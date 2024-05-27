@@ -1,27 +1,23 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db'); // Atualize o caminho conforme necessário
 
-const Empresa = sequelize.define('Empresa', {
-  id_empresa: {
+const Registro = sequelize.define('Registro', {
+  id_registro: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  cnpj: {
-    type: DataTypes.BIGINT,
+  data_registro: {
+    type: DataTypes.DATE,
     allowNull: true
   },
-  nome: {
-    type: DataTypes.STRING(50),
-    allowNull: true
-  },
-  id_cidade: {
+  venda: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: true
   }
 }, {
   timestamps: false,
-  tableName: 'empresa' // Nome da tabela no banco de dados
+  tableName: 'registros' // Nome da tabela no banco de dados
 });
 
-module.exports = Empresa;
+module.exports = Registro;

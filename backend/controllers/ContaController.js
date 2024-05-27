@@ -1,12 +1,12 @@
 const Conta = require('../models/Conta'); // Atualize o caminho conforme necessário
 
 const insertConta = async (req, res) => {
-  const { data_conta, cliente, id_venda, id_estoque, empresa } = req.body;
+  const { data_conta, id_cliente, id_venda, id_estoque, id_empresa, qtde_parcelas, valor_parcela } = req.body;
 
   try {
     // Create a new CategoriaProduto
     const novaConta = await Conta.create({
-      data_conta, cliente, id_venda, id_estoque, empresa
+      data_conta, id_cliente, id_venda, id_estoque, id_empresa, qtde_parcelas, valor_parcela
     });
 
     // If CategoriaProduto was created successfully, return data

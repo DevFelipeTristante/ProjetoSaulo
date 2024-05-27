@@ -1,6 +1,6 @@
 const {body} = require("express-validator")
 
-const insertCategoriaProdutoValidation = () => {
+const insertCategoriaValidation = () => {
   return [
     body("categoria")
       .isString()
@@ -11,5 +11,5 @@ const insertCategoriaProdutoValidation = () => {
 }
 
 module.exports = {
-  insertCategoriaProdutoValidation,
+  insertCategoriaValidation,
 }

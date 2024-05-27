@@ -19,10 +19,6 @@ const Venda = sequelize.define('Venda', {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  id_estoque: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
   valor_venda: {
     type: DataTypes.DOUBLE(9, 2),
     allowNull: true
@@ -32,6 +28,10 @@ const Venda = sequelize.define('Venda', {
     allowNull: true
   },
   id_forma: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
+  qtde_parcelas: {
     type: DataTypes.INTEGER,
     allowNull: true
   }

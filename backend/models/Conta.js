@@ -26,6 +26,13 @@ const Conta = sequelize.define('Conta', {
   id_empresa: {
     type: DataTypes.INTEGER,
     allowNull: true
+  },
+  qtde_parcelas: {
+    type: DataTypes.INTEGER
+  },
+  valor_parcela: {
+    type: DataTypes.DECIMAL(10,2),
+    allowNull: true
   }
 }, {
   timestamps: false,

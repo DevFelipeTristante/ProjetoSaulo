@@ -3,15 +3,15 @@ const router = express.Router()
 
 // Controller
 const { 
-  insertTelefone, 
-} = require("../controllers/TelefoneController")
+  insertRegistro, 
+} = require("../controllers/RegistroController")
 
 // Middlewares
-const { insertTelefoneValidation } = require("../middlewares/telefoneValidation")
+const { insertRegistroValidation } = require("../middlewares/registroValidation")
 const validate = require("../middlewares/handleValidation")
 
 // Routes 
-router.post("/insert", insertTelefoneValidation(), validate, insertTelefone)
+router.post("/insert", insertRegistroValidation(), validate, insertRegistro)
 // router.delete("/:id", authGuard, deleteCar)
 // router.get("/", authGuard, getAllCars)
 // router.get("/user/:id", getUserCars)

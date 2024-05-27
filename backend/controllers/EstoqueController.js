@@ -1,12 +1,12 @@
 const Estoque = require('../models/Estoque'); // Atualize o caminho conforme necessário
 
 const insertEstoque = async (req, res) => {
-  const { id_produto, qtd_prod } = req.body;
+  const { id_produto, qtd_prod, numero_nf } = req.body;
 
   try {
     // Create a new Empresa
     const novoEstoque = await Estoque.create({
-      id_produto, qtd_prod
+      id_produto, qtd_prod, numero_nf
     });
 
     // If Empresa was created successfully, return data

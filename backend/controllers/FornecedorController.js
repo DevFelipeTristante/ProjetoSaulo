@@ -1,4 +1,4 @@
-const Fornecedor = require('../models/Estoque'); // Atualize o caminho conforme necessário
+const Fornecedor = require('../models/Fornecedor'); // Atualize o caminho conforme necessário
 
 const insertFornecedor = async (req, res) => {
   const { nome_fornecedor, cidade, cliente } = req.body;

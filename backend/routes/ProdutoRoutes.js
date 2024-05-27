@@ -4,6 +4,9 @@ const router = express.Router()
 // Controller
 const { 
   insertProduto, 
+  getAllProdutos,
+  deleteProduto,
+  getProdutoById
 } = require("../controllers/ProdutoController")
 
 // Middlewares
@@ -12,10 +15,10 @@ const validate = require("../middlewares/handleValidation")
 
 // Routes 
 router.post("/insert", insertProdutoValidation(), validate, insertProduto)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
+router.delete("/delete/:id_produto", deleteProduto)
+router.get("/", getAllProdutos)
 // router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
+router.get("/:id_produto", getProdutoById)
 // router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
 
 module.exports = router

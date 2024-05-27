@@ -8,7 +8,7 @@ const usuarioCreateValidation = () => {
       .isLength({ min: 3 })
       .withMessage("O nome precisa ter no mínimo 3 caracteres"),
     body("senha")
-      .isString()
+      .isInt()
       .withMessage("A senha é obrigatória")
       .isLength({ min: 3 })
       .withMessage("A senha precisa ter no mínimo 3 caracteres"),
@@ -23,7 +23,18 @@ const usuarioCreateValidation = () => {
       }),
     body("id_perfil")
       .isInt()
-      .withMessage("O id_perfil é obrigatório"),
+      .withMessage("O ID Perfil é obrigatório.")
+      .isLength({min: 1})
+      .withMessage("O ID Perfil precisa ter pelo menos 1 dígito.")
+      .custom(value => value >= 1)
+      .withMessage("O ID Perfil precisa ser maior ou igual a 1."),   
+    body("id_empresa")
+      .isInt()
+      .withMessage("O ID Empresa é obrigatório.")
+      .isLength({min: 1})
+      .withMessage("O ID Empresa precisa ter pelo menos 1 dígito.")
+      .custom(value => value >= 1)
+      .withMessage("O ID Empresa precisa ser maior ou igual a 1."),  
     body("comissao")
       .isDecimal({ decimal_digits: "1,2" }) // Permite até 10 dígitos inteiros e 2 dígitos decimais
       .withMessage("Insira a comissão no formato decimal")
@@ -36,7 +47,7 @@ const loginValidation = () => {
       .isString()
       .withMessage("O nome do usuário é obrigatório."),
     body("senha")
-      .isString()
+      .isInt()
       .withMessage("A senha é obrigatória.")
   ]
 }

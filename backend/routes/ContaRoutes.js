@@ -8,10 +8,10 @@ const {
 
 // Middlewares
 const { insertContaValidation } = require("../middlewares/contaValidation")
-
+const validate = require ("../middlewares/handleValidation")
 
 // Routes 
-router.post("/", insertContaValidation(), insertConta)
+router.post("/insert", insertContaValidation(), validate, insertConta)
 // router.delete("/:id", authGuard, deleteCar)
 // router.get("/", authGuard, getAllCars)
 // router.get("/user/:id", getUserCars)

@@ -3,14 +3,15 @@ const router = express.Router()
 
 // Controller
 const { 
-  insertFornecedor, 
-} = require("../controllers/FornecedorController")
+  insertTipoCliente, 
+} = require("../controllers/TipoClienteController")
 
 // Middlewares
-const { insertFornecedorValidation } = require("../middlewares/fornecedorValidation")
+const { insertTipoValidation } = require("../middlewares/tipoValidation")
+const validate = require("../middlewares/handleValidation")
 
 // Routes 
-router.post("/", insertFornecedorValidation(), insertFornecedor)
+router.post("/insert", insertTipoValidation(), validate, insertTipoCliente)
 // router.delete("/:id", authGuard, deleteCar)
 // router.get("/", authGuard, getAllCars)
 // router.get("/user/:id", getUserCars)

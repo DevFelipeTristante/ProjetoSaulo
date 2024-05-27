@@ -41,13 +41,13 @@ const login = async (req, res) => {
   }
 
   // Verificar se a senha corresponde
-  if (senha !== usuario.senha) {
+  if (senha != usuario.senha) {
     res.status(422).json({ errors: ['Senha inválida'] });
     return;
   }
 
   // Retornar usuário
-  res.status(201).json({ id_usuario: usuario.id_usuario });
+  res.status(201).json(usuario);
 };
 
 const getCurrentUsuario = async (req, res) => {
