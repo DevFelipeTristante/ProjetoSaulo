@@ -1,21 +1,24 @@
-const express = require ("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Controller
 const { 
   insertTabelaPreco, 
-} = require("../controllers/TabelaPrecoController")
+  getAllTabelasPreco,
+  deleteTabelaPreco,
+  getTabelaPrecoById,
+  updateTabelaPreco
+} = require("../controllers/TabelaPrecoController");
 
 // Middlewares
-const { insertTabelaValidation } = require("../middlewares/tabelaValidation")
-const validate = require("../middlewares/handleValidation")
+const { insertTabelaValidation, updateTabelaValidation } = require("../middlewares/tabelaValidation");
+const validate = require("../middlewares/handleValidation");
 
 // Routes 
-router.post("/insert", insertTabelaValidation(), validate, insertTabelaPreco)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.post("/insert", insertTabelaValidation(), validate, insertTabelaPreco);
+router.delete("/delete/:id_tabela", deleteTabelaPreco);
+router.get("/get", getAllTabelasPreco);
+router.get("/get/:id_tabela", getTabelaPrecoById);
+router.put("/update/:id_tabela", updateTabelaValidation(), validate, updateTabelaPreco);
 
-module.exports = router
+module.exports = router;

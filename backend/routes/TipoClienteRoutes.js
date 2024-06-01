@@ -1,21 +1,24 @@
-const express = require ("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Controller
 const { 
   insertTipoCliente, 
-} = require("../controllers/TipoClienteController")
+  getAllTiposCliente,
+  deleteTipoCliente,
+  getTipoClienteById,
+  updateTipoCliente
+} = require("../controllers/TipoClienteController");
 
 // Middlewares
-const { insertTipoValidation } = require("../middlewares/tipoValidation")
-const validate = require("../middlewares/handleValidation")
+const { insertTipoValidation, updateTipoValidation } = require("../middlewares/tipoValidation");
+const validate = require("../middlewares/handleValidation");
 
 // Routes 
-router.post("/insert", insertTipoValidation(), validate, insertTipoCliente)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.post("/insert", insertTipoValidation(), validate, insertTipoCliente);
+router.delete("/delete/:id_tipo", deleteTipoCliente);
+router.get("/get", getAllTiposCliente);
+router.get("/get/:id_tipo", getTipoClienteById);
+router.put("/update/:id_tipo", updateTipoValidation(), validate, updateTipoCliente);
 
-module.exports = router
+module.exports = router;

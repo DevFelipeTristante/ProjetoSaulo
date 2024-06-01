@@ -5,7 +5,8 @@ const router = express.Router()
 const { 
   register, 
   login, 
-  getCurrentUsuario,
+  getUsuarioById,
+  getAllUsuarios,
   update,
   deleteUsuario
 } = require("../controllers/UsuarioController")
@@ -21,8 +22,9 @@ const {
 // Routes
 router.post("/register", usuarioCreateValidation(), validate, register)
 router.post("/login", loginValidation(), validate, login)
-router.get("/profile/:id_usuario", getCurrentUsuario)
-router.put("/:id_usuario", usuarioUpdateValidation(), validate, update)
-router.delete("/:id_usuario", deleteUsuario)
+router.get("/get", getAllUsuarios);
+router.get("/get/:id_usuario", getUsuarioById)
+router.put("/update/:id_usuario", usuarioUpdateValidation(), validate, update)
+router.delete("/delete/:id_usuario", deleteUsuario)
 
 module.exports = router

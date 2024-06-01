@@ -1,21 +1,24 @@
-const express = require ("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Controller
 const { 
   insertTelefone, 
-} = require("../controllers/TelefoneController")
+  getAllTelefones,
+  deleteTelefone,
+  getTelefoneById,
+  updateTelefone
+} = require("../controllers/TelefoneController");
 
 // Middlewares
-const { insertTelefoneValidation } = require("../middlewares/telefoneValidation")
-const validate = require("../middlewares/handleValidation")
+const { insertTelefoneValidation, updateTelefoneValidation } = require("../middlewares/telefoneValidation");
+const validate = require("../middlewares/handleValidation");
 
 // Routes 
-router.post("/insert", insertTelefoneValidation(), validate, insertTelefone)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.post("/insert", insertTelefoneValidation(), validate, insertTelefone);
+router.delete("/delete/:id_telefone", deleteTelefone);
+router.get("/get", getAllTelefones);
+router.get("/get/:id_telefone", getTelefoneById);
+router.put("/update/:id_telefone", updateTelefoneValidation(), validate, updateTelefone);
 
-module.exports = router
+module.exports = router;

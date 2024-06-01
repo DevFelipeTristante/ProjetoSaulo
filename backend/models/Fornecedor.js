@@ -11,11 +11,7 @@ const Fornecedor = sequelize.define('Fornecedor', {
     type: DataTypes.STRING(50),
     allowNull: true
   },
-  cidade: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  cliente: {
+  id_cidade: {
     type: DataTypes.INTEGER,
     allowNull: true
   }

@@ -19,10 +19,6 @@ const Conta = sequelize.define('Conta', {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  id_estoque: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
   id_empresa: {
     type: DataTypes.INTEGER,
     allowNull: true

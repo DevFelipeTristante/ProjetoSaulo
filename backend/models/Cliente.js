@@ -15,15 +15,11 @@ const Cliente = sequelize.define('Cliente', {
     type: DataTypes.STRING(50),
     allowNull: true
   },
-  id_telefone: {
+  id_tipo: {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  tipo_cliente: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  cidade: {
+  id_cidade: {
     type: DataTypes.INTEGER,
     allowNull: true
   }

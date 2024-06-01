@@ -77,9 +77,36 @@ const getProdutoById = async (req, res) => {
   }
 }
 
+const updateProduto = async (req, res) => {
+  const { id_produto } = req.params;
+  const { descricao_produto, id_tabela, id_categoria, qtd_estoque } = req.body;
+
+  try {
+    const produto = await Produto.findByPk(id_produto);
+
+    if (!produto) {
+      res.status(404).json({ errors: ["Produto não encontrado."] });
+      return;
+    }
+
+    if (descricao_produto) produto.descricao_produto = descricao_produto;
+    if (id_tabela) produto.id_tabela = id_tabela;
+    if (id_categoria) produto.id_categoria = id_categoria;
+    if (qtd_estoque) produto.qtd_estoque = qtd_estoque;
+
+    await produto.save();
+
+    res.status(200).json({ produto, message: "Produto atualizado com sucesso!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ errors: ["Houve um problema, por favor tente novamente mais tarde."] });
+  }
+};
+
 module.exports = {
   insertProduto,
   getAllProdutos,
   deleteProduto,
-  getProdutoById
+  getProdutoById,
+  updateProduto
 };

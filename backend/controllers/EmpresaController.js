@@ -1,3 +1,4 @@
+// controllers/EmpresaController.js
 const Empresa = require('../models/Empresa'); // Atualize o caminho conforme necessário
 
 const insertEmpresa = async (req, res) => {
@@ -76,9 +77,35 @@ const getEmpresaById = async (req, res) => {
   }
 }
 
+const updateEmpresa = async (req, res) => {
+  const { id_empresa } = req.params;
+  const { cnpj, nome, id_cidade } = req.body;
+
+  try {
+    const empresaExistente = await Empresa.findByPk(id_empresa);
+
+    if (!empresaExistente) {
+      res.status(404).json({ errors: ["Empresa não encontrada."] });
+      return;
+    }
+
+    if (cnpj) empresaExistente.cnpj = cnpj;
+    if (nome) empresaExistente.nome = nome;
+    if (id_cidade) empresaExistente.id_cidade = id_cidade;
+
+    await empresaExistente.save();
+
+    res.status(200).json({ empresa: empresaExistente, message: "Empresa atualizada com sucesso!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ errors: ["Houve um problema, por favor tente novamente mais tarde."] });
+  }
+}
+
 module.exports = {
   insertEmpresa,
   getAllEmpresas,
   deleteEmpresa,
-  getEmpresaById
+  getEmpresaById,
+  updateEmpresa
 };

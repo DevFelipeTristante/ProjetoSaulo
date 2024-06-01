@@ -7,6 +7,10 @@ const Telefone = sequelize.define('Telefone', {
     primaryKey: true,
     autoIncrement: true
   },
+  id_cliente: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
   numero: {
     type: DataTypes.STRING(50),
     allowNull: true

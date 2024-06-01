@@ -10,6 +10,18 @@ const insertTipoValidation = () => {
   ]
 }
 
+const updateTipoValidation = () => {
+  return [
+    body("tipo_cliente")
+      .optional()
+      .isString()
+      .withMessage("O tipo do cliente deve ser uma string.")
+      .isLength({min: 2})
+      .withMessage("O tipo do cliente precisa ter no mínimo 2 caracteres."),
+  ]
+}
+
 module.exports = {
   insertTipoValidation,
+  updateTipoValidation
 }

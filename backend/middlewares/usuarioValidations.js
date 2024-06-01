@@ -9,35 +9,25 @@ const usuarioCreateValidation = () => {
       .withMessage("O nome precisa ter no mínimo 3 caracteres"),
     body("senha")
       .isInt()
-      .withMessage("A senha é obrigatória")
-      .isLength({ min: 3 })
-      .withMessage("A senha precisa ter no mínimo 3 caracteres"),
+      .withMessage("A senha é obrigatória e deve ser numérica."),
     body("confirmSenha")
       .isInt()
       .withMessage("A confirmação de senha é obrigatória.")
-      .custom((value, {req}) => {
-        if (value != req.body.senha) {
-          throw new Error("As senhas não são iguais.")
+      .custom((value, { req }) => {
+        if (value !== req.body.senha) {
+          throw new Error("As senhas não são iguais.");
         }
-        return true
+        return true;
       }),
     body("id_perfil")
-      .isInt()
-      .withMessage("O ID Perfil é obrigatório.")
-      .isLength({min: 1})
-      .withMessage("O ID Perfil precisa ter pelo menos 1 dígito.")
-      .custom(value => value >= 1)
-      .withMessage("O ID Perfil precisa ser maior ou igual a 1."),   
+      .isInt({ min: 1 })
+      .withMessage("O ID Perfil é obrigatório e deve ser um número inteiro maior ou igual a 1."),
     body("id_empresa")
-      .isInt()
-      .withMessage("O ID Empresa é obrigatório.")
-      .isLength({min: 1})
-      .withMessage("O ID Empresa precisa ter pelo menos 1 dígito.")
-      .custom(value => value >= 1)
-      .withMessage("O ID Empresa precisa ser maior ou igual a 1."),  
+      .isInt({ min: 1 })
+      .withMessage("O ID Empresa é obrigatório e deve ser um número inteiro maior ou igual a 1."),
     body("comissao")
-      .isDecimal({ decimal_digits: "1,2" }) // Permite até 10 dígitos inteiros e 2 dígitos decimais
-      .withMessage("Insira a comissão no formato decimal")
+      .isFloat({ min: 0.01 })
+      .withMessage("A comissão é obrigatória e deve ser um número maior que zero.")
   ];
 };
 
@@ -49,24 +39,48 @@ const loginValidation = () => {
     body("senha")
       .isInt()
       .withMessage("A senha é obrigatória.")
-  ]
-}
+  ];
+};
 
 const usuarioUpdateValidation = () => {
   return [
     body("nome_usuario")
       .optional()
-      .isLength({ min:3 })
-      .withMessage("O nome precisa de pelo menos 3 caracteres."),
+      .isString()
+      .withMessage("O nome deve ser uma string.")
+      .isLength({ min: 3 })
+      .withMessage("O nome precisa ter no mínimo 3 caracteres."),
     body("senha")
       .optional()
-      .isLength({ min:3 })
-      .withMessage("A senha precisa ter no mínimo 3 caracteres.")
-  ]
-}
+      .isInt()
+      .withMessage("A senha deve ser um número inteiro."),
+    body("confirmSenha")
+      .optional()
+      .isInt()
+      .withMessage("A confirmação de senha deve ser um número inteiro.")
+      .custom((value, { req }) => {
+        if (value !== req.body.senha) {
+          throw new Error("As senhas não são iguais.");
+        }
+        return true;
+      }),
+    body("id_perfil")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage("O ID Perfil deve ser um número inteiro maior ou igual a 1."),
+    body("id_empresa")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage("O ID Empresa deve ser um número inteiro maior ou igual a 1."),
+    body("comissao")
+      .optional()
+      .isFloat({ min: 0.01 })
+      .withMessage("A comissão deve ser um número maior que zero.")
+  ];
+};
 
 module.exports = {
   usuarioCreateValidation,
   loginValidation,
   usuarioUpdateValidation,
-}
+};

@@ -21,7 +21,7 @@ const Usuario = sequelize.define('Usuario', {
   },
   senha: {
     type: DataTypes.INTEGER,
-    allowNull: true
+    allowNull: false
   },
   id_empresa: {
     type: DataTypes.INTEGER,

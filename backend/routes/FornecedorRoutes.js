@@ -1,21 +1,24 @@
-const express = require ("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Controller
 const { 
   insertFornecedor, 
-} = require("../controllers/FornecedorController")
+  getAllFornecedores,
+  deleteFornecedor,
+  getFornecedorById,
+  updateFornecedor
+} = require("../controllers/FornecedorController");
 
 // Middlewares
-const { insertFornecedorValidation } = require("../middlewares/fornecedorValidation")
-const validate = require ("../middlewares/handleValidation")
+const { insertFornecedorValidation, updateFornecedorValidation } = require("../middlewares/fornecedorValidation");
+const validate = require("../middlewares/handleValidation");
 
 // Routes 
-router.post("/insert", insertFornecedorValidation(), validate, insertFornecedor)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.post("/insert", insertFornecedorValidation(), validate, insertFornecedor);
+router.delete("/delete/:id_fornecedor", deleteFornecedor);
+router.get("/get", getAllFornecedores);
+router.get("/get/:id_fornecedor", getFornecedorById);
+router.put("/update/:id_fornecedor", updateFornecedorValidation(), validate, updateFornecedor);
 
-module.exports = router
+module.exports = router;

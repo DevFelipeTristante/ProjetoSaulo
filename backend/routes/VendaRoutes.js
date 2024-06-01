@@ -4,18 +4,21 @@ const router = express.Router()
 // Controller
 const { 
   insertVenda, 
+  getAllVendas,
+  deleteVenda,
+  getVendaById,
+  updateVenda
 } = require("../controllers/VendaController")
 
 // Middlewares
-const { insertContaValidation } = require("../middlewares/vendaValidation")
+const { insertVendaValidation, updateVendaValidation } = require("../middlewares/vendaValidation")
 const validate = require("../middlewares/handleValidation")
 
 // Routes 
-router.post("/insert", insertContaValidation(), validate, insertVenda)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.post("/insert", insertVendaValidation(), validate, insertVenda)
+router.delete("/delete/:id_venda", deleteVenda)
+router.get("/get", getAllVendas)
+router.get("/get/:id_venda", getVendaById)
+router.put("/update/:id_venda", updateVendaValidation(), validate, updateVenda);
 
 module.exports = router

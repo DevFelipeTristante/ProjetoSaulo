@@ -11,7 +11,7 @@ const Registro = sequelize.define('Registro', {
     type: DataTypes.DATE,
     allowNull: true
   },
-  venda: {
+  id_venda: {
     type: DataTypes.INTEGER,
     allowNull: true
   }

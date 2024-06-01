@@ -4,8 +4,11 @@ const sequelize = require('../config/db'); // Atualize o caminho conforme necess
 const TabelaPreco = sequelize.define('TabelaPreco', {
   id_tabela: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+    primaryKey: true
+  },
+  id_produto: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   },
   preco: {
     type: DataTypes.DECIMAL(9, 2),

@@ -1,12 +1,13 @@
+// controllers/ContaController.js
 const Conta = require('../models/Conta'); // Atualize o caminho conforme necessário
 
 const insertConta = async (req, res) => {
-  const { data_conta, id_cliente, id_venda, id_estoque, id_empresa, qtde_parcelas, valor_parcela } = req.body;
+  const { data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela } = req.body;
 
   try {
     // Create a new CategoriaProduto
     const novaConta = await Conta.create({
-      data_conta, id_cliente, id_venda, id_estoque, id_empresa, qtde_parcelas, valor_parcela
+      data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela
     });
 
     // If CategoriaProduto was created successfully, return data
@@ -76,9 +77,38 @@ const getContaById = async (req, res) => {
   }
 }
 
+const updateConta = async (req, res) => {
+  const { id_conta } = req.params;
+  const { data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela } = req.body;
+
+  try {
+    const contaExistente = await Conta.findByPk(id_conta);
+
+    if (!contaExistente) {
+      res.status(404).json({ errors: ["Conta não encontrada."] });
+      return;
+    }
+
+    if (data_conta) contaExistente.data_conta = data_conta;
+    if (id_cliente) contaExistente.id_cliente = id_cliente;
+    if (id_venda) contaExistente.id_venda = id_venda;
+    if (id_empresa) contaExistente.id_empresa = id_empresa;
+    if (qtde_parcelas) contaExistente.qtde_parcelas = qtde_parcelas;
+    if (valor_parcela) contaExistente.valor_parcela = valor_parcela;
+
+    await contaExistente.save();
+
+    res.status(200).json({ conta: contaExistente, message: "Conta atualizada com sucesso!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ errors: ["Houve um problema, por favor tente novamente mais tarde."] });
+  }
+}
+
 module.exports = {
   insertConta,
   getAllContas,
   deleteConta,
-  getContaById
+  getContaById,
+  updateConta
 };

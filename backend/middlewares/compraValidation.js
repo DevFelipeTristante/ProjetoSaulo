@@ -1,30 +1,51 @@
-const {body} = require("express-validator")
+const { body } = require("express-validator");
 
 const insertCompraValidation = () => {
   return [
+    body("numeroNF")
+      .isInt({ min: 1 })
+      .withMessage("O Número da Nota Fiscal é obrigatório e deve ser um inteiro maior ou igual a 1."),
     body("valor")
-      .isFloat({ min: 1 })
-      .withMessage("O valor da parcela é obrigatório e deve ser numérico."),
+      .isFloat({ min: 0.01 })
+      .withMessage("O valor da parcela é obrigatório e deve ser numérico e maior que zero."),
     body("quantidade")
-      .isInt()
-      .withMessage("A quantidade de parcelas é obrigatória.")
-      .isLength({min: 1})
-      .withMessage("A quantidade de parcelas precisa ter pelo menos 1 dígito.")
-      .custom(value => value >= 1)
-      .withMessage("A quantidade de parcelas precisa ser maior ou igual a 1."),
+      .isInt({ min: 1 })
+      .withMessage("A quantidade de parcelas é obrigatória e deve ser um inteiro maior ou igual a 1."),
     body("data_nf")
       .isDate()
-      .withMessage("A data é obrigatória."),
+      .withMessage("A data é obrigatória e deve estar no formato correto."),
     body("id_produto")
-      .isInt()
-      .withMessage("O ID Produto é obrigatório.")
-      .isLength({min: 1})
-      .withMessage("O ID Produto precisa ter pelo menos 1 dígito.")
-      .custom(value => value >= 1)
-      .withMessage("O ID Produto precisa ser maior ou igual a 1.")
-  ]
-}
+      .isInt({ min: 1 })
+      .withMessage("O ID Produto é obrigatório e deve ser um inteiro maior ou igual a 1.")
+  ];
+};
+
+const updateCompraValidation = () => {
+  return [
+    body("numeroNF")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage("O Número da Nota Fiscal deve ser um inteiro maior ou igual a 1."),
+    body("valor")
+      .optional()
+      .isFloat({ min: 0.01 })
+      .withMessage("O valor da parcela deve ser numérico e maior que zero."),
+    body("quantidade")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage("A quantidade de parcelas deve ser um inteiro maior ou igual a 1."),
+    body("data_nf")
+      .optional()
+      .isDate()
+      .withMessage("A data deve estar no formato correto."),
+    body("id_produto")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage("O ID Produto deve ser um inteiro maior ou igual a 1.")
+  ];
+};
 
 module.exports = {
   insertCompraValidation,
-}
+  updateCompraValidation,
+};

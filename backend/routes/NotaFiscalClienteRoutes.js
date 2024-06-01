@@ -1,21 +1,24 @@
-const express = require ("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Controller
 const { 
   insertNFCliente, 
-} = require("../controllers/NFClienteController")
+  getAllNFClientes,
+  deleteNFCliente,
+  getNFClienteById,
+  updateNFCliente
+} = require("../controllers/NFClienteController");
 
 // Middlewares
-const { insertNFClienteValidation } = require("../middlewares/nfclienteValidation")
-const validate = require ("../middlewares/handleValidation")
+const { insertNFClienteValidation, updateNFClienteValidation } = require("../middlewares/nfClienteValidation");
+const validate = require("../middlewares/handleValidation");
 
 // Routes 
-router.post("/insert", insertNFClienteValidation(), validate, insertNFCliente)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.post("/insert", insertNFClienteValidation(), validate, insertNFCliente);
+router.delete("/delete/:numeroNF", deleteNFCliente);
+router.get("/get", getAllNFClientes);
+router.get("/get/:numeroNF", getNFClienteById);
+router.put("/update/:numeroNF", updateNFClienteValidation(), validate, updateNFCliente);
 
-module.exports = router
+module.exports = router;

@@ -4,18 +4,21 @@ const router = express.Router()
 // Controller
 const { 
   insertForma, 
+  getAllFormas,
+  deleteForma,
+  getFormaById,
+  updateForma
 } = require("../controllers/FormaController")
 
 // Middlewares
-const { insertFormaValidation } = require("../middlewares/formaValidation")
-const validate = require ("../middlewares/handleValidation")
+const { insertFormaValidation, updateFormaValidation } = require("../middlewares/formaValidation")
+const validate = require("../middlewares/handleValidation")
 
 // Routes 
 router.post("/insert", insertFormaValidation(), validate, insertForma)
-// router.delete("/:id", authGuard, deleteCar)
-// router.get("/", authGuard, getAllCars)
-// router.get("/user/:id", getUserCars)
-// router.get("/:id", authGuard, getCarById)
-// router.put("/:id", authGuard, carUpdateValidation(), validate, updateCar)
+router.delete("/delete/:id_forma", deleteForma)
+router.get("/get", getAllFormas)
+router.get("/get/:id_forma", getFormaById)
+router.put("/update/:id_forma", updateFormaValidation(), validate, updateForma);
 
 module.exports = router
