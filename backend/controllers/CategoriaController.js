@@ -1,4 +1,3 @@
-// controllers/CategoriaController.js
 const Categoria = require('../models/Categoria'); 
 
 const insertCategoria = async (req, res) => {
@@ -18,7 +17,7 @@ const insertCategoria = async (req, res) => {
   }
 };
 
-const getAllCategorias = async(req, res) => {
+const getAllCategorias = async (req, res) => {
   try {
     const categorias = await Categoria.findAll({});
     return res.status(200).json(categorias);
@@ -28,8 +27,8 @@ const getAllCategorias = async(req, res) => {
   }
 };
 
-const deleteCategoria = async(req, res) => {
-  const { id_categoria } = req.params;
+const deleteCategoria = async (req, res) => {
+  const { id_categoria } = req.body;
 
   try {
     const categoria = await Categoria.findByPk(id_categoria);
@@ -52,7 +51,7 @@ const deleteCategoria = async(req, res) => {
 };
 
 const getCategoriaById = async (req, res) => {
-  const { id_categoria } = req.params;
+  const { id_categoria } = req.body;
 
   try {
     const categoria = await Categoria.findByPk(id_categoria);
@@ -70,8 +69,7 @@ const getCategoriaById = async (req, res) => {
 };
 
 const updateCategoria = async (req, res) => {
-  const { id_categoria } = req.params;
-  const { categoria } = req.body;
+  const { id_categoria, categoria } = req.body;
 
   try {
     const categoriaExistente = await Categoria.findByPk(id_categoria);

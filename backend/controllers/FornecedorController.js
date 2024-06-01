@@ -30,7 +30,7 @@ const getAllFornecedores = async (req, res) => {
 
 // Deletar um fornecedor pelo ID
 const deleteFornecedor = async (req, res) => {
-  const { id_fornecedor } = req.params;
+  const { id_fornecedor } = req.body;
 
   try {
     const fornecedor = await Fornecedor.findByPk(id_fornecedor);
@@ -52,7 +52,7 @@ const deleteFornecedor = async (req, res) => {
 
 // Obter um fornecedor pelo ID
 const getFornecedorById = async (req, res) => {
-  const { id_fornecedor } = req.params;
+  const { id_fornecedor } = req.body;
 
   try {
     const fornecedor = await Fornecedor.findByPk(id_fornecedor);
@@ -71,8 +71,7 @@ const getFornecedorById = async (req, res) => {
 
 // Atualizar um fornecedor pelo ID
 const updateFornecedor = async (req, res) => {
-  const { id_fornecedor } = req.params;
-  const { nome_fornecedor, id_cidade } = req.body;
+  const { id_fornecedor, nome_fornecedor, id_cidade } = req.body;
 
   try {
     const fornecedorExistente = await Fornecedor.findByPk(id_fornecedor);

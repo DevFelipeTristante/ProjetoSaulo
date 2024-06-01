@@ -28,7 +28,7 @@ const getAllRegistros = async (req, res) => {
 
 // Deletar um registro pelo ID
 const deleteRegistro = async (req, res) => {
-  const { id_registro } = req.params;
+  const { id_registro } = req.body;
 
   try {
     const registro = await Registro.findByPk(id_registro);
@@ -48,7 +48,7 @@ const deleteRegistro = async (req, res) => {
 
 // Obter um registro pelo ID
 const getRegistroById = async (req, res) => {
-  const { id_registro } = req.params;
+  const { id_registro } = req.body;
 
   try {
     const registro = await Registro.findByPk(id_registro);
@@ -67,8 +67,7 @@ const getRegistroById = async (req, res) => {
 
 // Atualizar um registro pelo ID
 const updateRegistro = async (req, res) => {
-  const { id_registro } = req.params;
-  const { data_registro, id_venda } = req.body;
+  const { id_registro, data_registro, id_venda } = req.body;
 
   try {
     const registroExistente = await Registro.findByPk(id_registro);

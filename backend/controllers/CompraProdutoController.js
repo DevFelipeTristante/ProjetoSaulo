@@ -1,4 +1,3 @@
-// controllers/CompraProdutoController.js
 const CompraProduto = require('../models/CompraProduto'); // Atualize o caminho conforme necessário
 
 const insertCompra = async (req, res) => {
@@ -29,7 +28,7 @@ const getAllCompras = async (req, res) => {
 }
 
 const deleteCompra = async (req, res) => {
-  const { numeroNF } = req.params;
+  const { numeroNF } = req.body;
 
   try {
     const compra = await CompraProduto.findByPk(numeroNF);
@@ -45,14 +44,14 @@ const deleteCompra = async (req, res) => {
       }
     });
 
-    res.status(200).json({ numeroNF: numeroNF, message: "Compra excluída com sucesso." });
+    res.status(200).json({ numeroNF, message: "Compra excluída com sucesso." });
   } catch (error) {
     res.status(404).json({ errors: ["Compra não encontrada!"] });
   }
 }
 
 const getCompraById = async (req, res) => {
-  const { numeroNF } = req.params;
+  const { numeroNF } = req.body;
 
   try {
     const compra = await CompraProduto.findByPk(numeroNF);
@@ -70,8 +69,7 @@ const getCompraById = async (req, res) => {
 }
 
 const updateCompra = async (req, res) => {
-  const { numeroNF } = req.params;
-  const { valor, quantidade, data_nf, id_produto } = req.body;
+  const { numeroNF, valor, quantidade, data_nf, id_produto } = req.body;
 
   try {
     const compraExistente = await CompraProduto.findByPk(numeroNF);
@@ -81,7 +79,6 @@ const updateCompra = async (req, res) => {
       return;
     }
 
-    if (numeroNF) compraExistente.numeroNF = numeroNF;
     if (valor) compraExistente.valor = valor;
     if (quantidade) compraExistente.quantidade = quantidade;
     if (data_nf) compraExistente.data_nf = data_nf;

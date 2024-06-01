@@ -28,7 +28,7 @@ const getAllFormas = async (req, res) => {
 };
 
 const deleteForma = async (req, res) => {
-  const { id_forma } = req.params;
+  const { id_forma } = req.body;
 
   try {
     const forma = await FormaPagamento.findByPk(id_forma);
@@ -49,7 +49,7 @@ const deleteForma = async (req, res) => {
 };
 
 const getFormaById = async (req, res) => {
-  const { id_forma } = req.params;
+  const { id_forma } = req.body;
 
   try {
     const forma = await FormaPagamento.findByPk(id_forma);
@@ -67,8 +67,7 @@ const getFormaById = async (req, res) => {
 };
 
 const updateForma = async (req, res) => {
-  const { id_forma } = req.params;
-  const { descricao } = req.body;
+  const { id_forma, descricao } = req.body;
 
   try {
     const formaExistente = await FormaPagamento.findByPk(id_forma);

@@ -16,9 +16,9 @@ const validate = require("../middlewares/handleValidation");
 
 // Routes 
 router.post("/insert", insertTabelaValidation(), validate, insertTabelaPreco);
-router.delete("/delete/:id_tabela", deleteTabelaPreco);
-router.get("/get", getAllTabelasPreco);
-router.get("/get/:id_tabela", getTabelaPrecoById);
-router.put("/update/:id_tabela", updateTabelaValidation(), validate, updateTabelaPreco);
+router.delete("/delete", deleteTabelaPreco);
+router.get("/getall", getAllTabelasPreco);
+router.get("/get", getTabelaPrecoById);
+router.put("/update", updateTabelaValidation(), validate, updateTabelaPreco);
 
 module.exports = router;

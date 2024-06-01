@@ -16,9 +16,9 @@ const validate = require("../middlewares/handleValidation");
 
 // Routes 
 router.post("/insert", insertNFClienteValidation(), validate, insertNFCliente);
-router.delete("/delete/:numeroNF", deleteNFCliente);
-router.get("/get", getAllNFClientes);
-router.get("/get/:numeroNF", getNFClienteById);
-router.put("/update/:numeroNF", updateNFClienteValidation(), validate, updateNFCliente);
+router.delete("/delete", deleteNFCliente);
+router.get("/getall", getAllNFClientes);
+router.get("/get", getNFClienteById);
+router.put("/update", updateNFClienteValidation(), validate, updateNFCliente);
 
 module.exports = router;

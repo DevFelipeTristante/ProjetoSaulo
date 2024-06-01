@@ -1,4 +1,4 @@
-const PerfilUsuario = require('../models/PerfilUsuario'); 
+const PerfilUsuario = require('../models/PerfilUsuario');
 
 // Inserir um novo perfil
 const insertPerfil = async (req, res) => {
@@ -28,7 +28,7 @@ const getAllPerfis = async (req, res) => {
 
 // Deletar um perfil pelo ID
 const deletePerfil = async (req, res) => {
-  const { id_perfil } = req.params;
+  const { id_perfil } = req.body;
 
   try {
     const perfil = await PerfilUsuario.findByPk(id_perfil);
@@ -48,7 +48,7 @@ const deletePerfil = async (req, res) => {
 
 // Obter um perfil pelo ID
 const getPerfilById = async (req, res) => {
-  const { id_perfil } = req.params;
+  const { id_perfil } = req.body;
 
   try {
     const perfil = await PerfilUsuario.findByPk(id_perfil);
@@ -67,8 +67,7 @@ const getPerfilById = async (req, res) => {
 
 // Atualizar um perfil pelo ID
 const updatePerfil = async (req, res) => {
-  const { id_perfil } = req.params;
-  const { descricao } = req.body;
+  const { id_perfil, descricao } = req.body;
 
   try {
     const perfilExistente = await PerfilUsuario.findByPk(id_perfil);

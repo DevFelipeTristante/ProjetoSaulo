@@ -33,7 +33,7 @@ const getAllVendas = async (req, res) => {
 
 // Obtém uma venda por ID
 const getVendaById = async (req, res) => {
-  const { id_venda } = req.params;
+  const { id_venda } = req.body;
 
   try {
     const venda = await Venda.findByPk(id_venda);
@@ -53,8 +53,7 @@ const getVendaById = async (req, res) => {
 
 // Atualiza uma venda
 const updateVenda = async (req, res) => {
-  const { id_venda } = req.params;
-  const { id_usuario, id_cliente, valor_venda, id_forma, qtde_parcelas, data, id_empresa } = req.body;
+  const { id_venda, id_usuario, id_cliente, valor_venda, id_forma, qtde_parcelas, data, id_empresa } = req.body;
 
   try {
     const vendaExistente = await Venda.findByPk(id_venda);
@@ -84,7 +83,7 @@ const updateVenda = async (req, res) => {
 
 // Deleta uma venda
 const deleteVenda = async (req, res) => {
-  const { id_venda } = req.params;
+  const { id_venda } = req.body;
 
   try {
     const venda = await Venda.findByPk(id_venda);

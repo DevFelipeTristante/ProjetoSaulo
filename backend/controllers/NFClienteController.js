@@ -30,7 +30,7 @@ const getAllNFClientes = async (req, res) => {
 
 // Deletar uma nota fiscal de cliente pelo ID
 const deleteNFCliente = async (req, res) => {
-  const { numeroNF } = req.params;
+  const { numeroNF } = req.body;
 
   try {
     const nota = await NotaFiscalCliente.findByPk(numeroNF);
@@ -52,7 +52,7 @@ const deleteNFCliente = async (req, res) => {
 
 // Obter uma nota fiscal de cliente pelo ID
 const getNFClienteById = async (req, res) => {
-  const { numeroNF } = req.params;
+  const { numeroNF } = req.body;
 
   try {
     const nota = await NotaFiscalCliente.findByPk(numeroNF);
@@ -71,8 +71,7 @@ const getNFClienteById = async (req, res) => {
 
 // Atualizar uma nota fiscal de cliente pelo ID
 const updateNFCliente = async (req, res) => {
-  const { numeroNF } = req.params;
-  const { valor, quantidade, id_produto, data_nf, id_cliente, id_venda } = req.body;
+  const { numeroNF, valor, quantidade, id_produto, data_nf, id_cliente, id_venda } = req.body;
 
   try {
     const notaExistente = await NotaFiscalCliente.findByPk(numeroNF);

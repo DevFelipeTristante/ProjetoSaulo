@@ -1,16 +1,13 @@
-// controllers/ProdutoController.js
-const Produto = require('../models/Produto'); 
+const Produto = require('../models/Produto');
 
+// Inserir um novo produto
 const insertProduto = async (req, res) => {
   const { descricao_produto, id_tabela, id_categoria, qtd_estoque } = req.body;
 
   try {
-    // Create a new CategoriaProduto
     const novoProduto = await Produto.create({
       descricao_produto, id_tabela, id_categoria, qtd_estoque
     });
-
-    // If CategoriaProduto was created successfully, return data
     res.status(201).json(novoProduto);
   } catch (error) {
     console.log(error);
@@ -20,66 +17,61 @@ const insertProduto = async (req, res) => {
   }
 };
 
-const getAllProdutos = async(req, res) => {
+// Listar todos os produtos
+const getAllProdutos = async (req, res) => {
   try {
-    const produtos = await Produto.findAll({})
-    return res.status(200).json(produtos)
+    const produtos = await Produto.findAll({});
+    return res.status(200).json(produtos);
   } catch (error) {
-    console.error(error)
-    return res.status(500).json({ error: 'Um erro ocorreu ao buscar todas os produtos.' })
+    console.error(error);
+    return res.status(500).json({ error: 'Um erro ocorreu ao buscar todos os produtos.' });
   }
-}
+};
 
-const deleteProduto = async(req, res) => {
-  const {id_produto} = req.params 
+// Deletar um produto pelo ID
+const deleteProduto = async (req, res) => {
+  const { id_produto } = req.body;
 
   try {
-    const produto = await Produto.findByPk(id_produto)
+    const produto = await Produto.findByPk(id_produto);
 
-    // Check if photo exists
-    if(!produto) {
-      res.status(404).json({ errors: ["Produto não encontrado!"] })
-      return
+    if (!produto) {
+      res.status(404).json({ errors: ["Produto não encontrado!"] });
+      return;
     }
 
     await Produto.destroy({
-      where: {
-        id_produto: id_produto
-      }
-    })
+      where: { id_produto: id_produto }
+    });
 
-    res
-      .status(200)
-      .json({ 
-        id_produto: id_produto, message: "Produto excluído com sucesso." 
-      })
+    res.status(200).json({ id_produto: id_produto, message: "Produto excluído com sucesso." });
   } catch (error) {
-      res.status(404).json({ errors: ["Produto não encontrado!"] })
+    res.status(404).json({ errors: ["Produto não encontrado!"] });
   }
-}
+};
 
+// Obter um produto pelo ID
 const getProdutoById = async (req, res) => {
-  const {id_produto} = req.params
+  const { id_produto } = req.body;
 
   try {
-    const produto = await Produto.findByPk(id_produto)
+    const produto = await Produto.findByPk(id_produto);
 
-    // Check if photo exists
-    if(!produto) {
-      res.status(404).json({ errors: ["Produto não encontrada."]})
-      return
+    if (!produto) {
+      res.status(404).json({ errors: ["Produto não encontrado."] });
+      return;
     }
 
-    res.status(200).json(produto)
+    res.status(200).json(produto);
   } catch (error) {
-    console.error(error)
-    return res.status(500).json({ error: 'Ocorreu um erro ao recuperar o produto' })
+    console.error(error);
+    return res.status(500).json({ error: 'Ocorreu um erro ao recuperar o produto.' });
   }
-}
+};
 
+// Atualizar um produto pelo ID
 const updateProduto = async (req, res) => {
-  const { id_produto } = req.params;
-  const { descricao_produto, id_tabela, id_categoria, qtd_estoque } = req.body;
+  const { id_produto, descricao_produto, id_tabela, id_categoria, qtd_estoque } = req.body;
 
   try {
     const produto = await Produto.findByPk(id_produto);

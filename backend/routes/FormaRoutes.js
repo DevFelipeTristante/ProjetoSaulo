@@ -16,9 +16,9 @@ const validate = require("../middlewares/handleValidation")
 
 // Routes 
 router.post("/insert", insertFormaValidation(), validate, insertForma)
-router.delete("/delete/:id_forma", deleteForma)
-router.get("/get", getAllFormas)
-router.get("/get/:id_forma", getFormaById)
-router.put("/update/:id_forma", updateFormaValidation(), validate, updateForma);
+router.delete("/delete", deleteForma)
+router.get("/getall", getAllFormas)
+router.get("/get", getFormaById)
+router.put("/update", updateFormaValidation(), validate, updateForma);
 
 module.exports = router

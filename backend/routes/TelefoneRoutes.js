@@ -16,9 +16,9 @@ const validate = require("../middlewares/handleValidation");
 
 // Routes 
 router.post("/insert", insertTelefoneValidation(), validate, insertTelefone);
-router.delete("/delete/:id_telefone", deleteTelefone);
-router.get("/get", getAllTelefones);
-router.get("/get/:id_telefone", getTelefoneById);
-router.put("/update/:id_telefone", updateTelefoneValidation(), validate, updateTelefone);
+router.delete("/delete", deleteTelefone);
+router.get("/getall", getAllTelefones);
+router.get("/get", getTelefoneById);
+router.put("/update", updateTelefoneValidation(), validate, updateTelefone);
 
 module.exports = router;

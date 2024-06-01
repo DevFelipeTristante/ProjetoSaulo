@@ -26,7 +26,7 @@ const getAllTiposCliente = async (req, res) => {
 
 // Deletar um tipo de cliente pelo ID
 const deleteTipoCliente = async (req, res) => {
-  const { id_tipo } = req.params;
+  const { id_tipo } = req.body;
 
   try {
     const tipo = await TipoCliente.findByPk(id_tipo);
@@ -46,7 +46,7 @@ const deleteTipoCliente = async (req, res) => {
 
 // Obter um tipo de cliente pelo ID
 const getTipoClienteById = async (req, res) => {
-  const { id_tipo } = req.params;
+  const { id_tipo } = req.body;
 
   try {
     const tipo = await TipoCliente.findByPk(id_tipo);
@@ -65,8 +65,7 @@ const getTipoClienteById = async (req, res) => {
 
 // Atualizar um tipo de cliente pelo ID
 const updateTipoCliente = async (req, res) => {
-  const { id_tipo } = req.params;
-  const { tipo_cliente } = req.body;
+  const { id_tipo, tipo_cliente } = req.body;
 
   try {
     const tipoExistente = await TipoCliente.findByPk(id_tipo);

@@ -1,16 +1,13 @@
-// controllers/EmpresaController.js
 const Empresa = require('../models/Empresa'); // Atualize o caminho conforme necessário
 
 const insertEmpresa = async (req, res) => {
   const { cnpj, nome, id_cidade } = req.body;
 
   try {
-    // Create a new Empresa
     const novaEmpresa = await Empresa.create({
       cnpj, nome, id_cidade
     });
 
-    // If Empresa was created successfully, return data
     res.status(201).json(novaEmpresa);
   } catch (error) {
     console.log(error);
@@ -20,66 +17,59 @@ const insertEmpresa = async (req, res) => {
   }
 };
 
-const getAllEmpresas = async(req, res) => {
+const getAllEmpresas = async (req, res) => {
   try {
-    const empresas = await Empresa.findAll({})
-    return res.status(200).json(empresas)
+    const empresas = await Empresa.findAll({});
+    return res.status(200).json(empresas);
   } catch (error) {
-    console.error(error)
-    return res.status(500).json({ error: 'Um erro ocorreu ao buscar todas as empresas.' })
+    console.error(error);
+    return res.status(500).json({ error: 'Um erro ocorreu ao buscar todas as empresas.' });
   }
-}
+};
 
-const deleteEmpresa = async(req, res) => {
-  const {id_empresa} = req.params 
+const deleteEmpresa = async (req, res) => {
+  const { id_empresa } = req.body;
 
   try {
-    const empresa = await Empresa.findByPk(id_empresa)
+    const empresa = await Empresa.findByPk(id_empresa);
 
-    // Check if photo exists
-    if(!empresa) {
-      res.status(404).json({ errors: ["Empresa não encontrada!"] })
-      return
+    if (!empresa) {
+      res.status(404).json({ errors: ["Empresa não encontrada!"] });
+      return;
     }
 
     await Empresa.destroy({
       where: {
         id_empresa: id_empresa
       }
-    })
+    });
 
-    res
-      .status(200)
-      .json({ 
-        id_empresa: id_empresa, message: "Empresa excluída com sucesso." 
-      })
+    res.status(200).json({ id_empresa, message: "Empresa excluída com sucesso." });
   } catch (error) {
-      res.status(404).json({ errors: ["Empresa não encontrada!"] })
+    res.status(404).json({ errors: ["Empresa não encontrada!"] });
   }
-}
+};
 
 const getEmpresaById = async (req, res) => {
-  const {id_empresa} = req.params
+  const { id_empresa } = req.body;
 
   try {
-    const empresa = await Empresa.findByPk(id_empresa)
+    const empresa = await Empresa.findByPk(id_empresa);
 
-    // Check if photo exists
-    if(!empresa) {
-      res.status(404).json({ errors: ["Empresa não encontrada."]})
-      return
+    if (!empresa) {
+      res.status(404).json({ errors: ["Empresa não encontrada."] });
+      return;
     }
 
-    res.status(200).json(empresa)
+    res.status(200).json(empresa);
   } catch (error) {
-    console.error(error)
-    return res.status(500).json({ error: 'Ocorreu um erro ao recuperar a empresa' })
+    console.error(error);
+    return res.status(500).json({ error: 'Ocorreu um erro ao recuperar a empresa' });
   }
-}
+};
 
 const updateEmpresa = async (req, res) => {
-  const { id_empresa } = req.params;
-  const { cnpj, nome, id_cidade } = req.body;
+  const { id_empresa, cnpj, nome, id_cidade } = req.body;
 
   try {
     const empresaExistente = await Empresa.findByPk(id_empresa);
@@ -100,7 +90,7 @@ const updateEmpresa = async (req, res) => {
     console.error(error);
     res.status(500).json({ errors: ["Houve um problema, por favor tente novamente mais tarde."] });
   }
-}
+};
 
 module.exports = {
   insertEmpresa,

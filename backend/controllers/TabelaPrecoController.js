@@ -28,7 +28,7 @@ const getAllTabelasPreco = async (req, res) => {
 
 // Deletar uma tabela de preço pelo ID
 const deleteTabelaPreco = async (req, res) => {
-  const { id_tabela } = req.params;
+  const { id_tabela } = req.body;
 
   try {
     const tabela = await TabelaPreco.findByPk(id_tabela);
@@ -48,7 +48,7 @@ const deleteTabelaPreco = async (req, res) => {
 
 // Obter uma tabela de preço pelo ID
 const getTabelaPrecoById = async (req, res) => {
-  const { id_tabela } = req.params;
+  const { id_tabela } = req.body;
 
   try {
     const tabela = await TabelaPreco.findByPk(id_tabela);
@@ -67,8 +67,7 @@ const getTabelaPrecoById = async (req, res) => {
 
 // Atualizar uma tabela de preço pelo ID
 const updateTabelaPreco = async (req, res) => {
-  const { id_tabela } = req.params;
-  const { id_produto, preco } = req.body;
+  const { id_tabela, id_produto, preco } = req.body;
 
   try {
     const tabelaExistente = await TabelaPreco.findByPk(id_tabela);

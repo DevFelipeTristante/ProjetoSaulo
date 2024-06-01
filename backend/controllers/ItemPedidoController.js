@@ -30,7 +30,7 @@ const getAllItensPedido = async (req, res) => {
 
 // Deletar um item de pedido pelo ID
 const deleteItemPedido = async (req, res) => {
-  const { id_item } = req.params;
+  const { id_item } = req.body;
 
   try {
     const item = await ItemPedido.findByPk(id_item);
@@ -52,7 +52,7 @@ const deleteItemPedido = async (req, res) => {
 
 // Obter um item de pedido pelo ID
 const getItemPedidoById = async (req, res) => {
-  const { id_item } = req.params;
+  const { id_item } = req.body;
 
   try {
     const item = await ItemPedido.findByPk(id_item);
@@ -71,8 +71,7 @@ const getItemPedidoById = async (req, res) => {
 
 // Atualizar um item de pedido pelo ID
 const updateItemPedido = async (req, res) => {
-  const { id_item } = req.params;
-  const { id_venda, id_produto, id_tabela, preco_total, quantidade } = req.body;
+  const { id_item, id_venda, id_produto, id_tabela, preco_total, quantidade } = req.body;
 
   try {
     const itemExistente = await ItemPedido.findByPk(id_item);
@@ -82,11 +81,11 @@ const updateItemPedido = async (req, res) => {
       return;
     }
 
-    if (id_venda) itemExistente.id_venda = id_venda;
-    if (id_produto) itemExistente.id_produto = id_produto;
-    if (id_tabela) itemExistente.id_tabela = id_tabela;
-    if (preco_total) itemExistente.preco_total = preco_total;
-    if (quantidade) itemExistente.quantidade = quantidade;
+    if (id_venda !== undefined) itemExistente.id_venda = id_venda;
+    if (id_produto !== undefined) itemExistente.id_produto = id_produto;
+    if (id_tabela !== undefined) itemExistente.id_tabela = id_tabela;
+    if (preco_total !== undefined) itemExistente.preco_total = preco_total;
+    if (quantidade !== undefined) itemExistente.quantidade = quantidade;
 
     await itemExistente.save();
 
