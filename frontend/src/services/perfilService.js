@@ -1,10 +1,10 @@
 import { api, requestConfig } from "../utils/config";
 
-const insertProduto = async(data) => {
+const insertPerfil = async(data) => {
   const config = requestConfig("POST", data)
 
   try {
-    const res = await fetch(api + "/produto/insert", config)
+    const res = await fetch(api + "/perfil/insert", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -14,11 +14,11 @@ const insertProduto = async(data) => {
   }
 }
 
-const deleteProduto = async() => {
+const deletePerfil = async() => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/produto/delete", config)
+    const res = await fetch(api + "/perfil/delete", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -28,11 +28,11 @@ const deleteProduto = async() => {
   }
 }
 
-const getAllProdutos = async() => {
+const getAllPerfils = async() => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/produto/getall", config)
+    const res = await fetch(api + "/perfil/getall", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -42,11 +42,11 @@ const getAllProdutos = async() => {
   }
 }
 
-const getProdutoById = async () => {
+const getPerfilById = async () => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/produto/update", config)
+    const res = await fetch(api + "/perfil/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -56,11 +56,11 @@ const getProdutoById = async () => {
   }
 }
 
-const updateProduto = async (data) => {
+const updatePerfil = async (data) => {
   const config = requestConfig("PUT", data)
 
   try {
-    const res = await fetch(api + "/produto/update", config)
+    const res = await fetch(api + "/perfil/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -70,13 +70,13 @@ const updateProduto = async (data) => {
   }
 }
 
-const produtoService = {
-  insertProduto,
-  deleteProduto,
-  getAllProdutos,
-  getProdutoById,
-  updateProduto,
+const perfilService = {
+  insertPerfil,
+  deletePerfil,
+  getAllPerfils,
+  getPerfilById,
+  updatePerfil,
   
 }
 
-export default produtoService
+export default perfilService

@@ -19,7 +19,10 @@ const insertContaValidation = () => {
       .withMessage("A quantidade de parcelas é obrigatória e deve ser um inteiro maior ou igual a 1."),
     body("valor_parcela")
       .isFloat({ min: 0.01 })
-      .withMessage("O valor da parcela é obrigatório e deve ser numérico maior que zero.")
+      .withMessage("O valor da parcela é obrigatório e deve ser numérico maior que zero."),
+    body("status")
+      .isString()
+      .withMessage("O status é obrigatório.")
   ];
 };
 
@@ -48,7 +51,11 @@ const updateContaValidation = () => {
     body("valor_parcela")
       .optional()
       .isFloat({ min: 0.01 })
-      .withMessage("O valor da parcela deve ser numérico maior que zero.")
+      .withMessage("O valor da parcela deve ser numérico maior que zero."),
+    body("status")
+      .optional()
+      .isString()
+      .withMessage("O status deve ser uma string.")
   ];
 };
 

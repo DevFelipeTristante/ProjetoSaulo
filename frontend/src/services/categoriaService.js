@@ -1,6 +1,5 @@
 import { api, requestConfig } from "../utils/config";
 
-// Publish an user car
 const insertCategoria = async(data) => {
   const config = requestConfig("POST", data)
 
@@ -15,11 +14,53 @@ const insertCategoria = async(data) => {
   }
 }
 
-const getCategorias = async() => {
+const deleteCategoria = async() => {
+  const config = requestConfig("DELETE", null)
+
+  try {
+    const res = await fetch(api + "/categoria/delete", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getAllCategorias = async() => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/categoria/get", config)
+    const res = await fetch(api + "/categoria/getall", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getCategoriaById = async () => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + "/categoria/update", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const updateCategoria = async (data) => {
+  const config = requestConfig("PUT", data)
+
+  try {
+    const res = await fetch(api + "/categoria/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -31,7 +72,11 @@ const getCategorias = async() => {
 
 const categoriaService = {
   insertCategoria,
-  getCategorias
+  deleteCategoria,
+  getAllCategorias,
+  getCategoriaById,
+  updateCategoria,
+  
 }
 
 export default categoriaService

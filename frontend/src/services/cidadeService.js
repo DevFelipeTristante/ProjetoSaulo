@@ -1,10 +1,10 @@
 import { api, requestConfig } from "../utils/config";
 
-const insertProduto = async(data) => {
+const insertCidade = async(data) => {
   const config = requestConfig("POST", data)
 
   try {
-    const res = await fetch(api + "/produto/insert", config)
+    const res = await fetch(api + "/cidade/insert", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -14,11 +14,11 @@ const insertProduto = async(data) => {
   }
 }
 
-const deleteProduto = async() => {
+const deleteCidade = async() => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/produto/delete", config)
+    const res = await fetch(api + "/cidade/delete", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -28,11 +28,11 @@ const deleteProduto = async() => {
   }
 }
 
-const getAllProdutos = async() => {
+const getAllCidades = async() => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/produto/getall", config)
+    const res = await fetch(api + "/cidade/getall", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -42,11 +42,11 @@ const getAllProdutos = async() => {
   }
 }
 
-const getProdutoById = async () => {
+const getCidadeById = async () => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/produto/update", config)
+    const res = await fetch(api + "/cidade/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -56,11 +56,11 @@ const getProdutoById = async () => {
   }
 }
 
-const updateProduto = async (data) => {
+const updateCidade = async (data) => {
   const config = requestConfig("PUT", data)
 
   try {
-    const res = await fetch(api + "/produto/update", config)
+    const res = await fetch(api + "/cidade/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -70,13 +70,13 @@ const updateProduto = async (data) => {
   }
 }
 
-const produtoService = {
-  insertProduto,
-  deleteProduto,
-  getAllProdutos,
-  getProdutoById,
-  updateProduto,
+const cidadeService = {
+  insertCidade,
+  deleteCidade,
+  getAllCidades,
+  getCidadeById,
+  updateCidade,
   
 }
 
-export default produtoService
+export default cidadeService

@@ -1,11 +1,11 @@
 const Conta = require('../models/Conta'); // Atualize o caminho conforme necessário
 
 const insertConta = async (req, res) => {
-  const { data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela } = req.body;
+  const { data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela, status } = req.body;
 
   try {
     const novaConta = await Conta.create({
-      data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela
+      data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela, status
     });
 
     res.status(201).json(novaConta);
@@ -69,7 +69,7 @@ const getContaById = async (req, res) => {
 };
 
 const updateConta = async (req, res) => {
-  const { id_conta, data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela } = req.body;
+  const { id_conta, data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela, status } = req.body;
 
   try {
     const contaExistente = await Conta.findByPk(id_conta);
@@ -85,6 +85,7 @@ const updateConta = async (req, res) => {
     if (id_empresa) contaExistente.id_empresa = id_empresa;
     if (qtde_parcelas) contaExistente.qtde_parcelas = qtde_parcelas;
     if (valor_parcela) contaExistente.valor_parcela = valor_parcela;
+    if (status) contaExistente.status = status;
 
     await contaExistente.save();
 

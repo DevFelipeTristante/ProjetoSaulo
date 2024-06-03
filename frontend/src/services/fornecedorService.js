@@ -1,10 +1,10 @@
 import { api, requestConfig } from "../utils/config";
 
-const insertProduto = async(data) => {
+const insertFornecedor = async(data) => {
   const config = requestConfig("POST", data)
 
   try {
-    const res = await fetch(api + "/produto/insert", config)
+    const res = await fetch(api + "/fornecedor/insert", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -14,11 +14,11 @@ const insertProduto = async(data) => {
   }
 }
 
-const deleteProduto = async() => {
+const deleteFornecedor = async() => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/produto/delete", config)
+    const res = await fetch(api + "/fornecedor/delete", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -28,11 +28,11 @@ const deleteProduto = async() => {
   }
 }
 
-const getAllProdutos = async() => {
+const getAllFornecedors = async() => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/produto/getall", config)
+    const res = await fetch(api + "/fornecedor/getall", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -42,11 +42,11 @@ const getAllProdutos = async() => {
   }
 }
 
-const getProdutoById = async () => {
+const getFornecedorById = async () => {
   const config = requestConfig("GET", null)
 
   try {
-    const res = await fetch(api + "/produto/update", config)
+    const res = await fetch(api + "/fornecedor/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -56,11 +56,11 @@ const getProdutoById = async () => {
   }
 }
 
-const updateProduto = async (data) => {
+const updateFornecedor = async (data) => {
   const config = requestConfig("PUT", data)
 
   try {
-    const res = await fetch(api + "/produto/update", config)
+    const res = await fetch(api + "/fornecedor/update", config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -70,13 +70,13 @@ const updateProduto = async (data) => {
   }
 }
 
-const produtoService = {
-  insertProduto,
-  deleteProduto,
-  getAllProdutos,
-  getProdutoById,
-  updateProduto,
+const fornecedorService = {
+  insertFornecedor,
+  deleteFornecedor,
+  getAllFornecedors,
+  getFornecedorById,
+  updateFornecedor,
   
 }
 
-export default produtoService
+export default fornecedorService
