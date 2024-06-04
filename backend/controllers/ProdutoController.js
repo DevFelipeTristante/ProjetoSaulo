@@ -2,11 +2,11 @@ const Produto = require('../models/Produto');
 
 // Inserir um novo produto
 const insertProduto = async (req, res) => {
-  const { descricao_produto, id_tabela, id_categoria, qtd_estoque } = req.body;
+  const { descricao_produto, id_categoria, qtd_estoque } = req.body;
 
   try {
     const novoProduto = await Produto.create({
-      descricao_produto, id_tabela, id_categoria, qtd_estoque
+      descricao_produto, id_categoria, qtd_estoque
     });
     res.status(201).json(novoProduto);
   } catch (error) {
@@ -71,7 +71,7 @@ const getProdutoById = async (req, res) => {
 
 // Atualizar um produto pelo ID
 const updateProduto = async (req, res) => {
-  const { id_produto, descricao_produto, id_tabela, id_categoria, qtd_estoque } = req.body;
+  const { id_produto, descricao_produto, id_categoria, qtd_estoque } = req.body;
 
   try {
     const produto = await Produto.findByPk(id_produto);
@@ -82,7 +82,6 @@ const updateProduto = async (req, res) => {
     }
 
     if (descricao_produto) produto.descricao_produto = descricao_produto;
-    if (id_tabela) produto.id_tabela = id_tabela;
     if (id_categoria) produto.id_categoria = id_categoria;
     if (qtd_estoque) produto.qtd_estoque = qtd_estoque;
 

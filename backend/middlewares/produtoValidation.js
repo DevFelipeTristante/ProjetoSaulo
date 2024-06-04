@@ -7,9 +7,6 @@ const insertProdutoValidation = () => {
       .withMessage("A descrição do produto é obrigatória.")
       .isLength({ min: 2 })
       .withMessage("A descrição do produto precisa ter no mínimo 2 caracteres."),
-      body("id_tabela")
-      .isInt({ min: 1 })
-      .withMessage("O ID Tabela é obrigatório e deve ser um número inteiro maior ou igual a 1."),
     body("id_categoria")
       .isInt({ min: 1 })
       .withMessage("O ID Categoria é obrigatório e deve ser um número inteiro maior ou igual a 1."),
@@ -27,10 +24,6 @@ const updateProdutoValidation = () => {
       .withMessage("A descrição do produto deve ser uma string.")
       .isLength({ min: 2 })
       .withMessage("A descrição do produto precisa ter no mínimo 2 caracteres."),
-      body("id_tabela")
-      .optional()
-      .isInt({ min: 1 })
-      .withMessage("O ID Tabela deve ser um número inteiro maior ou igual a 1."),
     body("id_categoria")
       .optional()
       .isInt({ min: 1 })
