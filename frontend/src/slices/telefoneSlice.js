@@ -25,8 +25,8 @@ export const insertTelefone = createAsyncThunk(
 
 export const deleteTelefone = createAsyncThunk(
   "telefone/delete",
-  async(_, thunkAPI) => {
-    const data = await telefoneService.deleteTelefone()
+  async(id_telefone, thunkAPI) => {
+    const data = await telefoneService.deleteTelefone(id_telefone)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])
@@ -112,10 +112,7 @@ export const telefoneSlice = createSlice({
 
       state.telefones = state.telefones.filter((telefone) => {
         return telefone.id_telefone !== action.payload.id_telefone
-      })
-
-      state.message = action.payload.message
- 
+      }) 
     })
     .addCase(getAllTelefones.pending, (state) => {
       state.loading = true
@@ -145,7 +142,6 @@ export const telefoneSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.telefones.findIndex(telefone => telefone.id_telefone === action.payload.telefone.id_telefone);
       if (index !== -1) {

@@ -14,11 +14,11 @@ const insertProduto = async(data) => {
   }
 }
 
-const deleteProduto = async() => {
+const deleteProduto = async(id_produto) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/produto/delete", config)
+    const res = await fetch(api + "/produto/delete/" + id_produto, config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -33,6 +33,48 @@ const getAllProdutos = async() => {
 
   try {
     const res = await fetch(api + "/produto/getall", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getProdutos = async() => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + "/produto/getprodutos", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getEntrada = async(data_inicial, data_final) => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + `/produto/getentrada?data_inicial=${data_inicial}&data_final=${data_final}`, config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getSaida = async(data_inicial, data_final) => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + `/produto/getsaida?data_inicial=${data_inicial}&data_final=${data_final}`, config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -74,6 +116,9 @@ const produtoService = {
   insertProduto,
   deleteProduto,
   getAllProdutos,
+  getProdutos,
+  getEntrada,
+  getSaida,
   getProdutoById,
   updateProduto,
   

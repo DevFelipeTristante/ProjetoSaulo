@@ -1,4 +1,5 @@
 const Conta = require('../models/Conta'); // Atualize o caminho conforme necessário
+const connection = require('../config/connection');
 
 const insertConta = async (req, res) => {
   const { data_conta, id_cliente, id_venda, id_empresa, qtde_parcelas, valor_parcela, status } = req.body;
@@ -25,6 +26,25 @@ const getAllContas = async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: 'Um erro ocorreu ao buscar todas as contas.' });
   }
+};
+
+const getContasReceber = (req, res) => {
+  const { data_inicial, data_final } = req.query;
+
+  // Query para buscar as contas entre as datas especificadas
+  const query = `
+    SELECT *
+    FROM contas_receber
+    WHERE data BETWEEN ? AND ?
+  `;
+
+  connection.query(query, [data_inicial, data_final], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Um erro ocorreu ao buscar todas as contas.' });
+    }
+    return res.status(200).json(results);
+  });
 };
 
 const deleteConta = async (req, res) => {
@@ -99,6 +119,7 @@ const updateConta = async (req, res) => {
 module.exports = {
   insertConta,
   getAllContas,
+  getContasReceber,
   deleteConta,
   getContaById,
   updateConta

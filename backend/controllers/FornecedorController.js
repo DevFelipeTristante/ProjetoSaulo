@@ -4,6 +4,14 @@ const Fornecedor = require('../models/Fornecedor'); // Atualize o caminho confor
 const insertFornecedor = async (req, res) => {
   const { nome_fornecedor, id_cidade } = req.body;
 
+  // Verificar se o usuário existe
+  const fornecedor = await Fornecedor.findOne({ where: { nome_fornecedor } });
+
+  if (fornecedor) {
+    res.status(422).json({ errors: ['Por favor, utilize outro nome de fornecedor'] });
+    return;
+  }
+
   try {
     const novoFornecedor = await Fornecedor.create({
       nome_fornecedor, id_cidade
@@ -30,7 +38,7 @@ const getAllFornecedores = async (req, res) => {
 
 // Deletar um fornecedor pelo ID
 const deleteFornecedor = async (req, res) => {
-  const { id_fornecedor } = req.body;
+  const { id_fornecedor } = req.params;
 
   try {
     const fornecedor = await Fornecedor.findByPk(id_fornecedor);

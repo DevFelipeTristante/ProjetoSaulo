@@ -3,11 +3,11 @@ const router = express.Router()
 
 // Controller
 const { 
-  register, 
+  insertUsuario, 
   login, 
   getUsuarioById,
   getAllUsuarios,
-  update,
+  updateUsuario,
   deleteUsuario
 } = require("../controllers/UsuarioController")
 
@@ -20,11 +20,11 @@ const {
 } = require("../middlewares/usuarioValidations")
 
 // Routes
-router.post("/register", usuarioCreateValidation(), validate, register)
+router.post("/insert", usuarioCreateValidation(), validate, insertUsuario)
 router.post("/login", loginValidation(), validate, login)
 router.get("/getall", getAllUsuarios);
 router.get("/get/:id_usuario", getUsuarioById)
-router.put("/update/:id_usuario", usuarioUpdateValidation(), validate, update)
+router.put("/update", usuarioUpdateValidation(), validate, updateUsuario)
 router.delete("/delete/:id_usuario", deleteUsuario)
 
 module.exports = router

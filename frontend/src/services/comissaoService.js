@@ -42,6 +42,20 @@ const getAllComissaos = async() => {
   }
 }
 
+const getComissaoVendedor = async() => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + "/comissao/getcomissaovendedor", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getComissaoById = async () => {
   const config = requestConfig("GET", null)
 
@@ -76,7 +90,7 @@ const comissaoService = {
   getAllComissaos,
   getComissaoById,
   updateComissao,
-  
+  getComissaoVendedor
 }
 
 export default comissaoService

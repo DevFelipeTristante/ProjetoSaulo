@@ -7,13 +7,13 @@ const insertContaValidation = () => {
       .withMessage("A data é obrigatória e deve estar no formato correto."),
     body("id_cliente")
       .isInt({ min: 1 })
-      .withMessage("O ID Cliente é obrigatório e deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Cliente no formato incorreto. Escolha um já cadastrado."),
     body("id_venda")
       .isInt({ min: 1 })
-      .withMessage("O ID Venda é obrigatório e deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Venda no formato incorreto. Escolha uma já cadastrada."),
     body("id_empresa")
       .isInt({ min: 1 })
-      .withMessage("O ID Empresa é obrigatório e deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Empresa no formato incorreto. Escolha uma já cadastrada."),
     body("qtde_parcelas")
       .isInt({ min: 1 })
       .withMessage("A quantidade de parcelas é obrigatória e deve ser um inteiro maior ou igual a 1."),
@@ -35,15 +35,15 @@ const updateContaValidation = () => {
     body("id_cliente")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Cliente deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Cliente no formato incorreto. Escolha um já cadastrado."),
     body("id_venda")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Venda deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Venda no formato incorreto. Escolha uma já cadastrada."),
     body("id_empresa")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Empresa deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Empresa no formato incorreto. Escolha uma já cadastrada."),
     body("qtde_parcelas")
       .optional()
       .isInt({ min: 1 })

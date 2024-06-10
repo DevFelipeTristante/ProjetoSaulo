@@ -14,11 +14,11 @@ const insertCategoria = async(data) => {
   }
 }
 
-const deleteCategoria = async() => {
+const deleteCategoria = async(id_categoria) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/categoria/delete", config)
+    const res = await fetch(api + "/categoria/delete/" + id_categoria, config)
       .then((res) => res.json())
       .catch((err) => err)
 

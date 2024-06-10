@@ -1,5 +1,7 @@
 const Comissao = require('../models/Comissao'); 
 
+const connection = require('../config/connection');
+
 const insertComissao = async (req, res) => {
   const { id_usuario, valor_comissao, valor_total, comissao_paga } = req.body;
 
@@ -50,6 +52,21 @@ const deleteComissao = async (req, res) => {
   }
 };
 
+const getComissaoVendedor = (req, res) => {
+  // Query para buscar as contas entre as datas especificadas
+  const query = `
+    SELECT c.id_comissao, u.nome_usuario, c.valor_comissao, c.valor_total, c.comissao_paga FROM comissao_vendedor c, usuario u where c.id_usuario = u.id_usuario;
+  `;
+
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Um erro ocorreu ao buscar os produtos mais vendidos.' });
+    }
+    return res.status(200).json(results);
+  });
+};
+
 const getComissaoById = async (req, res) => {
   const { id_comissao } = req.body;
 
@@ -97,6 +114,7 @@ module.exports = {
   insertComissao,
   getAllComissaos,
   deleteComissao,
+  getComissaoVendedor,
   getComissaoById,
   updateComissao
 };

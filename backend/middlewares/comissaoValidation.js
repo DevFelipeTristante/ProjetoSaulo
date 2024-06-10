@@ -4,7 +4,7 @@ const insertComissaoValidation = () => {
   return [
     body("id_usuario")
       .isInt({ min: 1 })
-      .withMessage("O ID do Usuário é obrigatório e deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Usuário no formato incorreto. Escolha um já cadastrado."),
     body("valor_comissao")
       .optional()
       .isFloat({ min: 0.01 })
@@ -24,7 +24,7 @@ const updateComissaoValidation = () => {
     body("id_usuario")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID do Usuário deve ser um inteiro maior ou igual a 1."),
+      .withMessage("Usuário no formato incorreto. Escolha um já cadastrado."),
     body("valor_comissao")
       .optional()
       .isFloat({ min: 0.01 })

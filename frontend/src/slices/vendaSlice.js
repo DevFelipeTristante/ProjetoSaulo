@@ -25,8 +25,8 @@ export const insertVenda = createAsyncThunk(
 
 export const deleteVenda = createAsyncThunk(
   "venda/delete",
-  async(_, thunkAPI) => {
-    const data = await vendaService.deleteVenda()
+  async(id_venda, thunkAPI) => {
+    const data = await vendaService.deleteVenda(id_venda)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])

@@ -9,7 +9,7 @@ const insertFornecedorValidation = () => {
       .withMessage("O nome do fornecedor deve ser uma string."),
     body("id_cidade")
       .isInt({ min: 1 })
-      .withMessage("O ID Cidade é obrigatório e deve ser um inteiro maior ou igual a 1.")
+      .withMessage("Cidade no formato incorreto. Escolha uma já cadastrada.")
   ];
 };
 
@@ -24,7 +24,7 @@ const updateFornecedorValidation = () => {
     body("id_cidade")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Cidade deve ser um inteiro maior ou igual a 1.")
+      .withMessage("Cidade no formato incorreto. Escolha uma já cadastrada.")
   ];
 };
 

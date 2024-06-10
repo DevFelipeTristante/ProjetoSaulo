@@ -2,10 +2,10 @@ const TabelaPreco = require('../models/TabelaPreco'); // Atualize o caminho conf
 
 // Inserir uma nova tabela de preço
 const insertTabelaPreco = async (req, res) => {
-  const { id_tabela, id_produto, preco } = req.body;
+  const { preco } = req.body;
 
   try {
-    const novaTabela = await TabelaPreco.create({ id_tabela, id_produto, preco });
+    const novaTabela = await TabelaPreco.create({ preco });
     res.status(201).json(novaTabela);
   } catch (error) {
     console.log(error);
@@ -67,7 +67,7 @@ const getTabelaPrecoById = async (req, res) => {
 
 // Atualizar uma tabela de preço pelo ID
 const updateTabelaPreco = async (req, res) => {
-  const { id_tabela, id_produto, preco } = req.body;
+  const { preco } = req.body;
 
   try {
     const tabelaExistente = await TabelaPreco.findByPk(id_tabela);
@@ -77,8 +77,6 @@ const updateTabelaPreco = async (req, res) => {
       return;
     }
 
-    if (id_tabela) tabelaExistente.id_tabela = id_tabela;
-    if (id_produto) tabelaExistente.id_produto = id_produto;
     if (preco) tabelaExistente.preco = preco;
 
     await tabelaExistente.save();

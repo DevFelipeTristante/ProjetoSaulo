@@ -14,11 +14,11 @@ const insertEmpresa = async(data) => {
   }
 }
 
-const deleteEmpresa = async() => {
+const deleteEmpresa = async(id_empresa) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/empresa/delete", config)
+    const res = await fetch(api + "/empresa/delete/" + id_empresa, config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -33,6 +33,20 @@ const getAllEmpresas = async() => {
 
   try {
     const res = await fetch(api + "/empresa/getall", config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getProdutosVendidosEmpresa = async(id_empresa) => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + `/empresa/getempresa?id_empresa=${id_empresa}`, config)
       .then((res) => res.json())
       .catch((err) => err)
 
@@ -74,6 +88,7 @@ const empresaService = {
   insertEmpresa,
   deleteEmpresa,
   getAllEmpresas,
+  getProdutosVendidosEmpresa,
   getEmpresaById,
   updateEmpresa,
   

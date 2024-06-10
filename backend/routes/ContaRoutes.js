@@ -5,6 +5,7 @@ const router = express.Router()
 const { 
   insertConta, 
   getAllContas,
+  getContasReceber,
   deleteConta,
   getContaById,
   updateConta
@@ -18,6 +19,7 @@ const validate = require("../middlewares/handleValidation")
 router.post("/insert", insertContaValidation(), validate, insertConta)
 router.delete("/delete", deleteConta)
 router.get("/getall", getAllContas)
+router.get("/getcontas", getContasReceber)
 router.get("/get", getContaById)
 router.put("/update", updateContaValidation(), validate, updateConta);
 

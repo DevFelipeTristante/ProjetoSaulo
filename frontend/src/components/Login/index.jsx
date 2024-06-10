@@ -1,5 +1,6 @@
 import GradientWrapper from "../GradientWrapper";
 import LogoClothing from "../../assets/imgs/logo.png";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import { Link } from "react-router-dom"
@@ -13,6 +14,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { login, reset } from "../../slices/authSlice"
 
 export default function Login() {
+
+  const navigate = useNavigate()
+
   const [nome_usuario, setNome_usuario] = useState("")
   const [senha, setSenha] = useState("")
 
@@ -36,27 +40,29 @@ export default function Login() {
     dispatch(reset())
   }, [dispatch])
 
+  const cadastrarUsuario = () => {
+    navigate("/cadastroUsuario")
+  }
   return (
     <GradientWrapper>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center gap-5">
-          
-          <img src={LogoClothing} />
-          
-          <div className="space-x-2">
-            
+          <img src={LogoClothing} className="w-[23rem]" />
+          <div className="flex flex-col ml-4">
             <label className="text-white font-bold">Usuário</label>
-            <input type="text" id="usuario" className="p-1 rounded-3xl" onChange={(e) => setNome_usuario(e.target.value)} value={nome_usuario || ""} />
+            <input type="text" id="usuario" className="p-1 rounded-3xl w-[230px]" onChange={(e) => setNome_usuario(e.target.value)} value={nome_usuario || ""} />
           </div>
-          <div className="space-x-4">
+          <div className="flex flex-col ml-4">
             <label className="text-white font-bold">Senha</label>
-            <input type="password" id="senha" onChange={(e) => setSenha(e.target.value)} value={senha || ""} className="p-1 rounded-3xl" />
+            <input type="password" id="senha" className="p-1 rounded-3xl w-[230px]" onChange={(e) => setSenha(e.target.value)} value={senha || ""} />
           </div>
-          {!loading && <button type="submit" className="text-white bg-second-color rounded-3xl font-bold w-[110px] p-2 ml-[3.8rem]">
-            Entrar
-          </button>}
-          {error && <Message msg={error} type="error"/>}
-
+          <div className="flex gap-x-2">
+            {!loading && <button className="text-white mr-10 bg-second-color rounded-3xl font-bold w-[110px] p-2 ml-[3.8rem]">
+              Entrar
+            </button>}
+            
+          </div>
+          {error && <Message msg={error} type="error" />} 
         </div>
         
       </form>

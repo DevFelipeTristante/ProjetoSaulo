@@ -112,10 +112,7 @@ export const tabelaSlice = createSlice({
 
       state.tabelas = state.tabelas.filter((tabela) => {
         return tabela.id_tabela !== action.payload.id_tabela
-      })
-
-      state.message = action.payload.message
- 
+      }) 
     })
     .addCase(getAllTabelas.pending, (state) => {
       state.loading = true
@@ -145,7 +142,6 @@ export const tabelaSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.tabelas.findIndex(tabela => tabela.id_tabela === action.payload.tabela.id_tabela);
       if (index !== -1) {

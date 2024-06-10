@@ -16,7 +16,7 @@ const validate = require("../middlewares/handleValidation");
 
 // Routes 
 router.post("/insert", insertFornecedorValidation(), validate, insertFornecedor);
-router.delete("/delete", deleteFornecedor);
+router.delete("/delete/:id_fornecedor", deleteFornecedor);
 router.get("/getall", getAllFornecedores);
 router.get("/get", getFornecedorById);
 router.put("/update", updateFornecedorValidation(), validate, updateFornecedor);

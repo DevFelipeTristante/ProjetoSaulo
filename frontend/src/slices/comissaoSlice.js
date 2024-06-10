@@ -44,6 +44,14 @@ export const getAllComissaos = createAsyncThunk(
     return data 
 })
 
+export const getComissaoVendedor = createAsyncThunk(
+  "comissao/getcomissaovendedor", 
+  async(_, thunkAPI) => {
+    const data = await comissaoService.getComissaoVendedor()
+
+    return data 
+})
+
 export const getComissao = createAsyncThunk(
   "comissao/get",
   async(_, thunkAPI) => {
@@ -113,8 +121,6 @@ export const comissaoSlice = createSlice({
       state.comissaos = state.comissaos.filter((comissao) => {
         return comissao.id_comissao !== action.payload.id_comissao
       })
-
-      state.message = action.payload.message
  
     })
     .addCase(getAllComissaos.pending, (state) => {
@@ -122,6 +128,16 @@ export const comissaoSlice = createSlice({
       state.error = false
     })
     .addCase(getAllComissaos.fulfilled, (state, action) => {
+      state.loading = false
+      state.success = true
+      state.error = null
+      state.comissaos = action.payload 
+    })
+    .addCase(getComissaoVendedor.pending, (state) => {
+      state.loading = true
+      state.error = false
+    })
+    .addCase(getComissaoVendedor.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
       state.error = null

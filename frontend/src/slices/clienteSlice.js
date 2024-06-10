@@ -25,8 +25,8 @@ export const insertCliente = createAsyncThunk(
 
 export const deleteCliente = createAsyncThunk(
   "cliente/delete",
-  async(_, thunkAPI) => {
-    const data = await clienteService.deleteCliente()
+  async(id_cliente, thunkAPI) => {
+    const data = await clienteService.deleteCliente(id_cliente)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])
@@ -112,10 +112,7 @@ export const clienteSlice = createSlice({
 
       state.clientes = state.clientes.filter((cliente) => {
         return cliente.id_cliente !== action.payload.id_cliente
-      })
-
-      state.message = action.payload.message
- 
+      }) 
     })
     .addCase(getAllClientes.pending, (state) => {
       state.loading = true
@@ -145,7 +142,6 @@ export const clienteSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.clientes.findIndex(cliente => cliente.id_cliente === action.payload.cliente.id_cliente);
       if (index !== -1) {

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import empresaService from "../services/empresaService";
 
 const initialState = {
+  empresas2: [],
   empresas: [],
   empresa: {},
   error: false,
@@ -25,8 +26,8 @@ export const insertEmpresa = createAsyncThunk(
 
 export const deleteEmpresa = createAsyncThunk(
   "empresa/delete",
-  async(_, thunkAPI) => {
-    const data = await empresaService.deleteEmpresa()
+  async(id_empresa, thunkAPI) => {
+    const data = await empresaService.deleteEmpresa(id_empresa)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])
@@ -40,6 +41,14 @@ export const getAllEmpresas = createAsyncThunk(
   "empresa/getall", 
   async(_, thunkAPI) => {
     const data = await empresaService.getAllEmpresas()
+
+    return data 
+})
+
+export const getProdutosVendidosEmpresa = createAsyncThunk(
+  "empresa/getempresa", 
+  async(id_empresa, thunkAPI) => {
+    const data = await empresaService.getProdutosVendidosEmpresa(id_empresa)
 
     return data 
 })
@@ -114,7 +123,6 @@ export const empresaSlice = createSlice({
         return empresa.id_empresa !== action.payload.id_empresa
       })
 
-      state.message = action.payload.message
  
     })
     .addCase(getAllEmpresas.pending, (state) => {
@@ -122,6 +130,17 @@ export const empresaSlice = createSlice({
       state.error = false
     })
     .addCase(getAllEmpresas.fulfilled, (state, action) => {
+      state.loading = false
+      state.success = true
+      state.error = null
+      state.empresas = action.payload 
+      state.empresas2 = action.payload 
+    })
+    .addCase(getProdutosVendidosEmpresa.pending, (state) => {
+      state.loading = true
+      state.error = false
+    })
+    .addCase(getProdutosVendidosEmpresa.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
       state.error = null
@@ -145,7 +164,6 @@ export const empresaSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.empresas.findIndex(empresa => empresa.id_empresa === action.payload.empresa.id_empresa);
       if (index !== -1) {

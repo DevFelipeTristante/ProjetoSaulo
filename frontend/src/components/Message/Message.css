@@ -5,12 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5px;
 }
 
 .message.error {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
+
 }
 
 .message.success {

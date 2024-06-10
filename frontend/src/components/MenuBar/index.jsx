@@ -5,6 +5,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HomeIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import { logout, reset } from "../../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,17 +13,18 @@ import { useAuth } from "../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 
 const cadastros = [
-  { id: 1, rotulo: "Cadastro de Fornecedores" },
-  { id: 2, rotulo: "Cadastro de Vendedores" },
-  { id: 3, rotulo: "Cadastro de Clientes" },
-  { id: 4, rotulo: "Cadastro de Vendas" },
-  { id: 5, rotulo: "Cadastro de Cidades" },
-  { id: 6, rotulo: "Cadastro de Produtos" },
-  { id: 7, rotulo: "Cadastro de Categorias" },
-  { id: 8, rotulo: "Cadastro de Telefones" },
-  { id: 9, rotulo: "Cadastro de Contas" },
-  { id: 10, rotulo: "Cadastro de Movimentação" },
-  { id: 11, rotulo: "Relatórios" },
+  { rotulo: "Administração", caminho: "/Administracao" },
+  { rotulo: "Relatórios", caminho: "/Relatorios" },
+  { rotulo: "Tabela Preço", caminho: "/TabelaPreco" },
+  { rotulo: "Vendas", caminho: "/CadastroVenda" },
+  { rotulo: "Cadastro de Categorias", caminho: "/CadastroCategoria" },
+  { rotulo: "Cadastro de Cidades", caminho: "/CadastroCidade" },
+  { rotulo: "Cadastro de Clientes", caminho: "/CadastroClientes" },
+  { rotulo: "Cadastro de Empresa", caminho: "/CadastroEmpresa" },
+  { rotulo: "Cadastro de Fornecedores", caminho: "/CadastroFornecedor" },
+  { rotulo: "Cadastro de Produtos", caminho: "/CadastroProduto" },
+  { rotulo: "Cadastro de Telefones", caminho: "/CadastroTelefones" },
+  { rotulo: "Cadastro de Usuário", caminho: "/CadastroUsuario" },
 ];
 
 export default function BarMenu() {
@@ -42,8 +44,10 @@ export default function BarMenu() {
     return <p>Carregando...</p>;
   }
 
+  const navigate = useNavigate()
+
   return (
-    <div className="flex items-center justify-between absolute bottom-0 bg-black w-full h-16">
+    <div className="flex items-center justify-between fixed bottom-0 bg-black w-full h-16">
       <DropdownMenu>
         <DropdownMenuTrigger className="focus:outline-none">
           <div className="flex items-center space-x-2 ml-2">
@@ -57,7 +61,11 @@ export default function BarMenu() {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="space-y-2 bg-black">
           {cadastros.map((item) => (
-            <DropdownMenuItem key={item.id} className="font-bold text-white">
+            <DropdownMenuItem
+              key={item.rotulo}
+              className="font-bold text-white"
+              onClick={() => navigate(item.caminho)}
+            >
               {item.rotulo}
             </DropdownMenuItem>
           ))}

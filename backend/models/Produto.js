@@ -11,11 +11,11 @@ const Produto = sequelize.define('Produto', {
     type: DataTypes.STRING(50),
     allowNull: true
   },
-  id_tabela: {
+  id_categoria: {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  id_categoria: {
+  id_tabela: {
     type: DataTypes.INTEGER,
     allowNull: true
   },

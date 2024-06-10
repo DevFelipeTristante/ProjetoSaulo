@@ -44,6 +44,14 @@ export const getAllContas = createAsyncThunk(
     return data 
 })
 
+export const getContasReceber = createAsyncThunk(
+  "conta/getcontas", 
+  async({data_inicial, data_final}, thunkAPI) => {
+    const data = await contaService.getContasReceber(data_inicial, data_final)
+
+    return data 
+})
+
 export const getConta = createAsyncThunk(
   "conta/get",
   async(_, thunkAPI) => {
@@ -122,6 +130,16 @@ export const contaSlice = createSlice({
       state.error = false
     })
     .addCase(getAllContas.fulfilled, (state, action) => {
+      state.loading = false
+      state.success = true
+      state.error = null
+      state.contas = action.payload 
+    })
+    .addCase(getContasReceber.pending, (state) => {
+      state.loading = true
+      state.error = false
+    })
+    .addCase(getContasReceber.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
       state.error = null

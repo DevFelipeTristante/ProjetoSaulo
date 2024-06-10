@@ -7,7 +7,8 @@ const {
   getAllComissaos,
   deleteComissao,
   getComissaoById,
-  updateComissao
+  updateComissao,
+  getComissaoVendedor
 } = require("../controllers/ComissaoController");
 
 // Middlewares
@@ -18,6 +19,7 @@ const validate = require("../middlewares/handleValidation");
 router.post("/insert", insertComissaoValidation(), validate, insertComissao);
 router.delete("/delete", deleteComissao);
 router.get("/getall", getAllComissaos);
+router.get("/getcomissaovendedor", getComissaoVendedor);
 router.get("/get", getComissaoById);
 router.put("/update", updateComissaoValidation(), validate, updateComissao);
 

@@ -81,14 +81,13 @@ const updateVenda = async (req, res) => {
   }
 };
 
-// Deleta uma venda
+// Deletar uma venda pelo ID
 const deleteVenda = async (req, res) => {
-  const { id_venda } = req.body;
+  const { id_venda } = req.params;
 
   try {
     const venda = await Venda.findByPk(id_venda);
 
-    // Verifica se a venda existe
     if (!venda) {
       res.status(404).json({ errors: ["Venda não encontrada!"] });
       return;

@@ -19,7 +19,7 @@ const ItemPedido = sequelize.define('ItemPedido', {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  preco: {
+  preco_total: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: true
   },

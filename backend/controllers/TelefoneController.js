@@ -26,7 +26,7 @@ const getAllTelefones = async (req, res) => {
 
 // Deletar um telefone pelo ID
 const deleteTelefone = async (req, res) => {
-  const { id_telefone } = req.body;
+  const { id_telefone } = req.params;
 
   try {
     const telefone = await Telefone.findByPk(id_telefone);

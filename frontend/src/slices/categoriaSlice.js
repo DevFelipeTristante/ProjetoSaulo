@@ -25,8 +25,8 @@ export const insertCategoria = createAsyncThunk(
 
 export const deleteCategoria = createAsyncThunk(
   "categoria/delete",
-  async(_, thunkAPI) => {
-    const data = await categoriaService.deleteCategoria()
+  async(id_categoria, thunkAPI) => {
+    const data = await categoriaService.deleteCategoria(id_categoria)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])
@@ -113,8 +113,6 @@ export const categoriaSlice = createSlice({
       state.categorias = state.categorias.filter((categoria) => {
         return categoria.id_categoria !== action.payload.id_categoria
       })
-
-      state.message = action.payload.message
  
     })
     .addCase(getAllCategorias.pending, (state) => {
@@ -145,7 +143,6 @@ export const categoriaSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.categorias.findIndex(categoria => categoria.id_categoria === action.payload.categoria.id_categoria);
       if (index !== -1) {

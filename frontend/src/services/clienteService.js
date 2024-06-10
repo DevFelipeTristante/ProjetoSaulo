@@ -14,11 +14,11 @@ const insertCliente = async(data) => {
   }
 }
 
-const deleteCliente = async() => {
+const deleteCliente = async(id_cliente) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/cliente/delete", config)
+    const res = await fetch(api + "/cliente/delete/" + id_cliente, config)
       .then((res) => res.json())
       .catch((err) => err)
 

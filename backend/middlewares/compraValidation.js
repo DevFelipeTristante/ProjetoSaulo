@@ -16,7 +16,7 @@ const insertCompraValidation = () => {
       .withMessage("A data é obrigatória e deve estar no formato correto."),
     body("id_produto")
       .isInt({ min: 1 })
-      .withMessage("O ID Produto é obrigatório e deve ser um inteiro maior ou igual a 1.")
+      .withMessage("Produto no formato incorreto. Escolha um já cadastrado.")
   ];
 };
 
@@ -41,7 +41,7 @@ const updateCompraValidation = () => {
     body("id_produto")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Produto deve ser um inteiro maior ou igual a 1.")
+      .withMessage("Produto no formato incorreto. Escolha um já cadastrado.")
   ];
 };
 

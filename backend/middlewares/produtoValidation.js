@@ -7,12 +7,16 @@ const insertProdutoValidation = () => {
       .withMessage("A descrição do produto é obrigatória.")
       .isLength({ min: 2 })
       .withMessage("A descrição do produto precisa ter no mínimo 2 caracteres."),
-    body("id_categoria")
-      .isInt({ min: 1 })
-      .withMessage("O ID Categoria é obrigatório e deve ser um número inteiro maior ou igual a 1."),
     body("qtd_estoque")
       .isInt({ min: 1 })
-      .withMessage("A quantidade em estoque é obrigatória e deve ser um número inteiro maior ou igual a 1.")
+      .withMessage("A quantidade em estoque é obrigatória e deve ser um número inteiro maior ou igual a 1."),
+    body("id_categoria")
+      .isInt({ min: 1 })
+      .withMessage("Categoria no formato incorreto. Escolha uma já cadastrada."),
+    body("id_tabela")
+      .isInt({ min: 1 })
+      .withMessage("Tabela de preço no formato incorreto. Escolha uma já cadastrada."),
+    
   ];
 };
 
@@ -27,7 +31,11 @@ const updateProdutoValidation = () => {
     body("id_categoria")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Categoria deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Categoria no formato incorreto. Escolha uma já cadastrada."),
+    body("id_tabela")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage("Tabela de preço no formato incorreto. Escolha uma já cadastrada."),
     body("qtd_estoque")
       .optional()
       .isInt({ min: 1 })

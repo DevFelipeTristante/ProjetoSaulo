@@ -7,7 +7,10 @@ const {
   getAllProdutos,
   deleteProduto,
   getProdutoById,
-  updateProduto
+  updateProduto,
+  getProdutosVendidos,
+  getEntrada,
+  getSaida
 } = require("../controllers/ProdutoController")
 
 // Middlewares
@@ -16,8 +19,11 @@ const validate = require("../middlewares/handleValidation")
 
 // Routes 
 router.post("/insert", insertProdutoValidation(), validate, insertProduto)
-router.delete("/delete", deleteProduto)
+router.delete("/delete/:id_produto", deleteProduto)
 router.get("/getall", getAllProdutos)
+router.get("/getprodutos", getProdutosVendidos)
+router.get("/getentrada", getEntrada)
+router.get("/getsaida", getSaida)
 router.get("/get", getProdutoById)
 router.put("/update", updateProdutoValidation(), validate, updateProduto)
 

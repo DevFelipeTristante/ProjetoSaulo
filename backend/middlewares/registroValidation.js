@@ -7,7 +7,7 @@ const insertRegistroValidation = () => {
       .withMessage("A data é obrigatória e deve estar no formato correto."),
     body("id_venda")
       .isInt({ min: 1 })
-      .withMessage("O ID Venda é obrigatório e deve ser um número inteiro maior ou igual a 1.")
+      .withMessage("Venda no formato incorreto. Escolha uma já cadastrada.")
   ];
 };
 
@@ -20,7 +20,7 @@ const updateRegistroValidation = () => {
     body("id_venda")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Venda deve ser um número inteiro maior ou igual a 1.")
+      .withMessage("Venda no formato incorreto. Escolha uma já cadastrada.")
   ];
 };
 

@@ -1,5 +1,7 @@
 const Empresa = require('../models/Empresa'); // Atualize o caminho conforme necessário
 
+const connection = require('../config/connection');
+
 const insertEmpresa = async (req, res) => {
   const { cnpj, nome, id_cidade } = req.body;
 
@@ -27,8 +29,25 @@ const getAllEmpresas = async (req, res) => {
   }
 };
 
+const getProdutosVendidosEmpresa = (req, res) => {
+  const { id_empresa } = req.query;
+
+  // Query para buscar as contas entre as datas especificadas
+  const query = `
+    SELECT * FROM total_vendido_empresa_produto where idEmpresa = ?
+  `;
+
+  connection.query(query, [id_empresa], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Um erro ocorreu ao buscar os produtos mais vendidos por empresa.' });
+    }
+    return res.status(200).json(results);
+  });
+};
+
 const deleteEmpresa = async (req, res) => {
-  const { id_empresa } = req.body;
+  const { id_empresa } = req.params;
 
   try {
     const empresa = await Empresa.findByPk(id_empresa);
@@ -95,6 +114,7 @@ const updateEmpresa = async (req, res) => {
 module.exports = {
   insertEmpresa,
   getAllEmpresas,
+  getProdutosVendidosEmpresa,
   deleteEmpresa,
   getEmpresaById,
   updateEmpresa

@@ -1,7 +1,7 @@
 const Usuario = require('../models/Usuario'); // Atualize o caminho conforme necessário
 
 // Registrar usuário
-const register = async (req, res) => {
+const insertUsuario = async (req, res) => {
   const { nome_usuario, id_perfil, senha, comissao, id_empresa } = req.body;
 
   // Verificar se o usuário existe
@@ -48,43 +48,30 @@ const login = async (req, res) => {
 };
 
 // Update an usuario
-const update = async (req, res) => {
-  const { nome_usuario, id_perfil, comissao, senha, id_empresa } = req.body;
-  const { id_usuario } = req.params; // Obter o ID do usuário do parâmetro da rota
+const updateUsuario = async (req, res) => {
+  const { id_usuario, nome_usuario, id_perfil, comissao, senha, id_empresa } = req.body;
 
-  // Encontrar o usuário
-  const usuario = await Usuario.findByPk(id_usuario);
+  try {
+    const usuarioExistente = await Usuario.findByPk(id_usuario);
 
-  if (!usuario) {
-    res.status(404).json({ errors: ['Usuário não encontrado.'] });
-    return;
+    if (!usuarioExistente) {
+      res.status(404).json({ errors: ["Usuario não encontrado."] });
+      return;
+    }
+
+    if (nome_usuario) usuarioExistente.nome_usuario = nome_usuario;
+    if (id_perfil) usuarioExistente.id_perfil = id_perfil;
+    if (comissao) usuarioExistente.comissao = comissao;
+    if (senha) usuarioExistente.senha = senha;
+    if (id_empresa) usuarioExistente.id_empresa = id_empresa;
+
+    await usuarioExistente.save();
+
+    res.status(200).json({ usuario: usuarioExistente, message: "Fornecedor atualizado com sucesso!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ errors: ["Houve um problema, por favor tente novamente mais tarde."] });
   }
-
-  // Atualizar nome do usuário e senha
-  if (nome_usuario) {
-    usuario.nome_usuario = nome_usuario;
-  }
-
-  if (id_perfil) {
-    usuario.id_perfil = id_perfil;
-  }
-  
-  if (comissao) {
-    usuario.comissao = comissao;
-  }
-
-  if (senha) {
-    usuario.senha = senha;
-  }
-
-  if (id_empresa) {
-    usuario.id_empresa = id_empresa;
-  }
-
-  // Salvar as alterações
-  await usuario.save();
-
-  res.status(200).json(usuario);
 };
 
 // Listar todos os usuários
@@ -110,9 +97,9 @@ const deleteUsuario = async (req, res) => {
       return;
     }
 
-    await Usuario.destroy({ where: { id: id_usuario } });
+    await Usuario.destroy({ where: { id_usuario: id_usuario } });
 
-    res.status(200).json({ id_usuario, message: "Usuário excluído com sucesso." });
+    res.status(200).json({ id_usuario: id_usuario, message: "Usuário excluído com sucesso." });
   } catch (error) {
     res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
@@ -138,10 +125,10 @@ const getUsuarioById = async (req, res) => {
 };
 
 module.exports = {
-  register,
+  insertUsuario,
   login,
   getAllUsuarios,
   getUsuarioById,
-  update,
+  updateUsuario,
   deleteUsuario
 }

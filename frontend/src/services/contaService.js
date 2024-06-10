@@ -42,6 +42,20 @@ const getAllContas = async() => {
   }
 }
 
+const getContasReceber = async(data_inicial, data_final) => {
+  const config = requestConfig("GET", null)
+
+  try {
+    const res = await fetch(api + `/conta/getcontas?data_inicial=${data_inicial}&data_final=${data_final}`, config)
+      .then((res) => res.json())
+      .catch((err) => err)
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getContaById = async () => {
   const config = requestConfig("GET", null)
 
@@ -74,9 +88,9 @@ const contaService = {
   insertConta,
   deleteConta,
   getAllContas,
+  getContasReceber,
   getContaById,
-  updateConta,
-  
+  updateConta
 }
 
 export default contaService

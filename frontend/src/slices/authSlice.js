@@ -10,21 +10,6 @@ const initialState = {
   loading: false,
 }
 
-// Register an user and sign in
-export const register = createAsyncThunk(
-  "auth/register",
-  async (usuario, thunkAPI) => {
-    const data = await authService.register(usuario)
-
-    // check for errors
-    if(data.errors) {
-      return thunkAPI.rejectWithValue(data.errors[0])
-    }
-
-    return data
-  }
-)
-
 // Logout an user
 export const logout = createAsyncThunk("auth/logout", async() => {
   await authService.logout()
@@ -57,21 +42,6 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(register.pending, (state) => {
-      state.loading = true
-      state.error = false
-    })
-    .addCase(register.fulfilled, (state, action) => {
-      state.loading = false
-      state.success = true
-      state.error = null
-      state.usuario = action.payload
-    })
-    .addCase(register.rejected, (state, action) => {
-      state.loading = false
-      state.error = action.payload
-      state.usuario = null
-    })
     .addCase(logout.fulfilled, (state, action) => {
       state.loading = false
       state.success = true

@@ -28,7 +28,7 @@ const getAllCategorias = async (req, res) => {
 };
 
 const deleteCategoria = async (req, res) => {
-  const { id_categoria } = req.body;
+  const { id_categoria } = req.params;
 
   try {
     const categoria = await Categoria.findByPk(id_categoria);

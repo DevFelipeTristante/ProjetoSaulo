@@ -2,7 +2,7 @@ import React from 'react';
 
 function GradientWrapper({ children }) {
   return (
-    <div className="min-h-screen bg-gradient-primary"> 
+    <div className="h-screen bg-gradient-primary"> 
       {children}
     </div>
   );

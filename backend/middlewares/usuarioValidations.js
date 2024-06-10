@@ -10,24 +10,24 @@ const usuarioCreateValidation = () => {
     body("senha")
       .isInt()
       .withMessage("A senha é obrigatória e deve ser numérica."),
-    body("confirmSenha")
-      .isInt()
-      .withMessage("A confirmação de senha é obrigatória.")
-      .custom((value, { req }) => {
-        if (value !== req.body.senha) {
-          throw new Error("As senhas não são iguais.");
-        }
-        return true;
-      }),
+    // body("confirmSenha")
+    //   .isInt()
+    //   .withMessage("A confirmação de senha é obrigatória.")
+    //   .custom((value, { req }) => {
+    //     if (value !== req.body.senha) {
+    //       throw new Error("As senhas não são iguais.");
+    //     }
+    //     return true;
+    //   }),
     body("id_perfil")
       .isInt({ min: 1 })
-      .withMessage("O ID Perfil é obrigatório e deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Perfil usuário no formato incorreto. Escolha um já cadastrado."),
     body("id_empresa")
       .isInt({ min: 1 })
-      .withMessage("O ID Empresa é obrigatório e deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Empresa no formato incorreto. Escolha uma já cadastrada."),
     body("comissao")
-      .isFloat({ min: 0.01 })
-      .withMessage("A comissão é obrigatória e deve ser um número maior que zero.")
+      .isFloat({ min: 0.00 })
+      .withMessage("A comissão deve ser numérica.")
   ];
 };
 
@@ -54,28 +54,28 @@ const usuarioUpdateValidation = () => {
       .optional()
       .isInt()
       .withMessage("A senha deve ser um número inteiro."),
-    body("confirmSenha")
-      .optional()
-      .isInt()
-      .withMessage("A confirmação de senha deve ser um número inteiro.")
-      .custom((value, { req }) => {
-        if (value !== req.body.senha) {
-          throw new Error("As senhas não são iguais.");
-        }
-        return true;
-      }),
+    // body("confirmSenha")
+    //   .optional()
+    //   .isInt()
+    //   .withMessage("A confirmação de senha deve ser um número inteiro.")
+    //   .custom((value, { req }) => {
+    //     if (value !== req.body.senha) {
+    //       throw new Error("As senhas não são iguais.");
+    //     }
+    //     return true;
+    //   }),
     body("id_perfil")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Perfil deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Perfil usuário no formato incorreto. Escolha um já cadastrado."),
     body("id_empresa")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID Empresa deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Empresa no formato incorreto. Escolha uma já cadastrada."),
     body("comissao")
       .optional()
-      .isFloat({ min: 0.01 })
-      .withMessage("A comissão deve ser um número maior que zero.")
+      .isFloat({ min: 0.00 })
+      .withMessage("A comissão deve ser numérica.")
   ];
 };
 

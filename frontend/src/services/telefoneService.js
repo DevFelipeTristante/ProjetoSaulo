@@ -14,11 +14,11 @@ const insertTelefone = async(data) => {
   }
 }
 
-const deleteTelefone = async() => {
+const deleteTelefone = async(id_telefone) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/telefone/delete", config)
+    const res = await fetch(api + "/telefone/delete/" + id_telefone, config)
       .then((res) => res.json())
       .catch((err) => err)
 

@@ -23,7 +23,7 @@ const getAllClientes = async (req, res) => {
 };
 
 const deleteCliente = async (req, res) => {
-  const { id_cliente } = req.body;
+  const { id_cliente } = req.params;
 
   try {
     const cliente = await Cliente.findByPk(id_cliente);

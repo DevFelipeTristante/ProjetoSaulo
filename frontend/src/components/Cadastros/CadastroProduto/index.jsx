@@ -6,31 +6,63 @@ import { Label } from "@/components/ui/label";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import { useDispatch, useSelector } from "react-redux";
-import { insertProduto, resetMessage } from "../../../slices/produtoSlice";
+import { insertProduto, resetMessage, updateProduto } from "../../../slices/produtoSlice";
 import { useEffect, useState } from "react";
 import Message from "../../Message/Message";
-import { getCategorias } from "../../../slices/categoriaSlice";
+import { getAllCategorias } from "../../../../../frontend/src/slices/categoriaSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getAllTabelas } from "../../../slices/tabelaSlice";
 
 export default function CadastroProduto() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { loading } = useSelector((state) => state.usuario);
+  const { categorias } = useSelector((state) => state.categoria);
+  const { tabelas } = useSelector((state) => state.tabela);
+
   const {
-    loading: loadingProduto,
     message,
     error,
   } = useSelector((state) => state.produto);
 
-  const { categorias } = useSelector((state) => state.categoria);
+  const [descricao_produto, setDescricao_produto] = useState("");
+  const [id_categoria, setId_categoria] = useState("");
+  const [id_tabela, setId_tabela] = useState(""); // Adicionando id_tabela
+  const [qtd_estoque, setQtd_estoque] = useState("");
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  const [tabelaSelecionada, setTabelaSelecionada] = useState(null); // Adicionando tabelaSelecionada
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
-    dispatch(getCategorias())
+    dispatch(getAllCategorias())
+    dispatch(getAllTabelas())
   }, [dispatch])
 
-  const [descricao_produto, setDescricao_produto] = useState("");
-  const [id_tabela, setId_tabela] = useState("");
-  const [id_categoria, setId_categoria] = useState("");
-  const [quantidade, setQuantidade] = useState("");
+  useEffect(() => {
+    if (location.state && location.state.produto) {
+      const { produto } = location.state;
+      setDescricao_produto(produto.descricao_produto);
+      setId_categoria(produto.id_categoria);
+      setId_tabela(produto.id_tabela); // Configurando id_tabela
+      setQtd_estoque(produto.qtd_estoque);
+      const categoria = categorias.find(categoria => categoria.id_categoria === produto.id_categoria);
+      const tabela = tabelas.find(tabela => tabela.id_tabela === produto.id_tabela); // Configurando tabela
+      setCategoriaSelecionada(categoria || null);
+      setTabelaSelecionada(tabela || null); // Configurando tabelaSelecionada
+      setIsEdit(true);
+    } else {
+      // Reset to insertion mode if no fornecedor in location state
+      setDescricao_produto("");
+      setId_categoria(null);
+      setId_tabela(null); // Reset id_tabela
+      setQtd_estoque(null)
+      setCategoriaSelecionada(null);
+      setTabelaSelecionada(null); // Reset tabelaSelecionada
+      setIsEdit(false);
+    }
+  }, [location.state, categorias, tabelas]);
 
   const resetComponentMessage = () => {
     setTimeout(() => {
@@ -44,28 +76,30 @@ export default function CadastroProduto() {
     const produto = {
       descricao_produto,
       id_categoria,
-      qtd_estoque: quantidade
+      id_tabela, // Incluindo id_tabela
+      qtd_estoque
     };
 
-    console.log("Produto a ser enviado:", produto); // Verifique aqui o objeto produto
-
-
-    dispatch(insertProduto(produto));
+    if (isEdit) {
+      dispatch(updateProduto({ ...produto, id_produto: location.state.produto.id_produto }))
+        .then(() => {
+          resetComponentMessage();
+          navigate("/ProdutoUpdate");
+        });
+    } else {
+      dispatch(insertProduto(produto))
+        .then(() => {
+          resetComponentMessage();
+        });
+    }
 
     setDescricao_produto("");
-    setId_categoria("");
-    setQuantidade("");
-
-    resetComponentMessage();
+    setId_categoria(null);
+    setId_tabela(null); // Reset id_tabela
+    setQtd_estoque("");
+    setCategoriaSelecionada(null);
+    setTabelaSelecionada(null); // Reset tabelaSelecionada
   };
-
-  // const clearInputs = (e) => {
-  //   e.preventDefault();
-  //   setDescricao_produto("");
-  //   setId_tabela("");
-  //   setId_categoria("");
-  //   dispatch(resetMessage()); // Adicione esta linha
-  // };
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -73,12 +107,12 @@ export default function CadastroProduto() {
 
   return (
     <GradientWrapper>
-      <HeaderCadsatro label="PRODUTO" />
+      <HeaderCadsatro label={isEdit ? "EDITAR PRODUTO" : "CADASTRO DE PRODUTO"} />
       <div className="flex justify-center items-center mt-14">
         <form onSubmit={submitHandle} className="flex flex-col gap-4 w-96">
           {/* descrição do produto */}
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="descricao_produto" className="text-white font-bold">
+            <Label htmlFor="nome" className="text-white font-bold">
               DESCRIÇÃO:
             </Label>
             <Input
@@ -91,15 +125,15 @@ export default function CadastroProduto() {
           </div>
           {/* quantidade */}
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="quantidade" className="text-white font-bold">
+            <Label htmlFor="nome" className="text-white font-bold">
               QUANTIDADE:
             </Label>
             <Input
               type="text"
-              id="quantidade"
+              id="qtd_estoque"
               placeholder="Escreva a quantidade do produto"
-              onChange={(e) => setQuantidade(e.target.value)}
-              value={quantidade || ""}
+              onChange={(e) => setQtd_estoque(e.target.value)}
+              value={qtd_estoque || ""}
             />
           </div>
           {/* Autocomplete da descrição do produto */}
@@ -107,26 +141,48 @@ export default function CadastroProduto() {
             <label className="text-white font-bold text-sm">
               CATEGORIA:{" "}
               <Autocomplete
-                id="categoria_autocomplete"
+                id="id_categoria"
                 options={categorias}
                 getOptionLabel={(option) => option.categoria}
+                value={categoriaSelecionada}
+                isOptionEqualToValue={(option, value) => option.id_categoria === value?.id_categoria}
                 onChange={(event, newValue) => {
-                  setId_categoria(newValue ? newValue.id_categoria : "");
+                  setCategoriaSelecionada(newValue);
+                  setId_categoria(newValue ? newValue.id_categoria : null);
                 }}
                 renderInput={(params) => (
                   <div ref={params.InputProps.ref}>
                     <input
                       type="text"
                       {...params.inputProps}
-                      className="flex h-10 w-full rounded-md border border-neutral-200
-                    bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent 
-                    file:text-sm file:font-medium placeholder:text-neutral-500 
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 
-                    focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50
-                     dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950
-                      dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300
-                      text-black mt-1 font-normal"
-                      placeholder="Digite a categoria do produto"
+                      className="flex h-10 w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 text-black mt-1 font-normal"
+                      placeholder="Digite a categoria"
+                    />
+                  </div>
+                )}
+              />
+            </label>
+          </>
+          <>
+            <label className="text-white font-bold text-sm">
+              TABELA PREÇO:{" "}
+              <Autocomplete
+                id="id_tabela"
+                options={tabelas}
+                getOptionLabel={(option) => option.preco}
+                value={tabelaSelecionada}
+                isOptionEqualToValue={(option, value) => option.id_tabela === value?.id_tabela}
+                onChange={(event, newValue) => {
+                  setTabelaSelecionada(newValue);
+                  setId_tabela(newValue ? newValue.id_tabela : null);
+                }}
+                renderInput={(params) => (
+                  <div ref={params.InputProps.ref}>
+                    <input
+                      type="text"
+                      {...params.inputProps}
+                      className="flex h-10 w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 text-black mt-1 font-normal"
+                      placeholder="Digite o preço"
                     />
                   </div>
                 )}
@@ -134,17 +190,21 @@ export default function CadastroProduto() {
             </label>
           </>
           <div className="flex justify-center">
-            {!loadingProduto && <button className="text-white bg-black font-bold w-[200px] h-[40px] rounded-xl">
-              Cadastrar
-            </button>}
-            {loadingProduto && <button className="text-white bg-black font-bold w-[200px] h-[40px] rounded-xl">
-              Aguarde...
-            </button>}
+            <div className="flex justify-center">
+              <button type="submit" className="text-white bg-black font-bold w-full max-w-xs h-10 rounded-xl">
+                {isEdit ? "Atualizar" : "Confirmar"}
+              </button>
+            </div>
           </div>
+          {/* {message && (
+            <div className="mt-4 lg:mt-12 p-2 bg-green-500 text-white rounded font-bold text-center">
+              {message}
+            </div>
+          )} */}
         </form>
-      {error && <Message msg={error} type="error"/>}
-      {message && <Message msg={message} type="success"/>}
       </div>
+      {error && <Message msg={error} type="error" />}
+      {message && <Message msg={message} type="success" />}
       <BarMenu />
     </GradientWrapper>
   );

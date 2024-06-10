@@ -7,7 +7,8 @@ const {
   getAllEmpresas,
   deleteEmpresa,
   getEmpresaById,
-  updateEmpresa
+  updateEmpresa,
+  getProdutosVendidosEmpresa
 } = require("../controllers/EmpresaController")
 
 // Middlewares
@@ -16,8 +17,9 @@ const validate = require("../middlewares/handleValidation")
 
 // Routes 
 router.post("/insert", insertEmpresaValidation(), validate, insertEmpresa)
-router.delete("/delete", deleteEmpresa)
+router.delete("/delete/:id_empresa", deleteEmpresa)
 router.get("/getall", getAllEmpresas)
+router.get("/getempresa", getProdutosVendidosEmpresa)
 router.get("/get", getEmpresaById)
 router.put("/update", updateEmpresaValidation(), validate, updateEmpresa);
 

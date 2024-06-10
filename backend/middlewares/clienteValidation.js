@@ -14,10 +14,10 @@ const insertClienteValidation = () => {
       .withMessage("O endereço precisa ter no mínimo 2 caracteres."),
     body("id_tipo")
       .isInt({ min: 1 })
-      .withMessage("O ID Tipo de Cliente é obrigatório e deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Tipo no formato incorreto. Escolha um já cadastrado."),
     body("id_cidade")
       .isInt({ min: 1 })
-      .withMessage("O ID Cidade é obrigatório e deve ser um número inteiro maior ou igual a 1.")
+      .withMessage("Cidade no formato incorreto. Escolha uma já cadastrada.")
   ];
 };
 
@@ -38,11 +38,11 @@ const updateClienteValidation = () => {
     body("id_tipo")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID do tipo cliente deve ser um número inteiro maior ou igual a 1."),
+      .withMessage("Tipo no formato incorreto. Escolha um já cadastrado."),
     body("id_cidade")
       .optional()
       .isInt({ min: 1 })
-      .withMessage("O ID da cidade deve ser um número inteiro maior ou igual a 1.")
+      .withMessage("Cidade no formato incorreto. Escolha uma já cadastrada.")
   ];
 };
 

@@ -14,11 +14,11 @@ const insertFornecedor = async(data) => {
   }
 }
 
-const deleteFornecedor = async() => {
+const deleteFornecedor = async(id_fornecedor) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/fornecedor/delete", config)
+    const res = await fetch(api + "/fornecedor/delete/" + id_fornecedor, config)
       .then((res) => res.json())
       .catch((err) => err)
 

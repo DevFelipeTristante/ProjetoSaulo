@@ -25,8 +25,8 @@ export const insertProduto = createAsyncThunk(
 
 export const deleteProduto = createAsyncThunk(
   "produto/delete",
-  async(_, thunkAPI) => {
-    const data = await produtoService.deleteProduto()
+  async(id_produto, thunkAPI) => {
+    const data = await produtoService.deleteProduto(id_produto)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])
@@ -40,6 +40,30 @@ export const getAllProdutos = createAsyncThunk(
   "produto/getall", 
   async(_, thunkAPI) => {
     const data = await produtoService.getAllProdutos()
+
+    return data 
+})
+
+export const getProdutos = createAsyncThunk(
+  "produto/getprodutos", 
+  async(_, thunkAPI) => {
+    const data = await produtoService.getProdutos()
+
+    return data 
+})
+
+export const getEntrada = createAsyncThunk(
+  "produto/getentrada", 
+  async({data_inicial, data_final}, thunkAPI) => {
+    const data = await produtoService.getEntrada(data_inicial, data_final)
+
+    return data 
+})
+
+export const getSaida = createAsyncThunk(
+  "produto/getsaida", 
+  async({data_inicial, data_final}, thunkAPI) => {
+    const data = await produtoService.getSaida(data_inicial, data_final)
 
     return data 
 })
@@ -112,16 +136,49 @@ export const produtoSlice = createSlice({
 
       state.produtos = state.produtos.filter((produto) => {
         return produto.id_produto !== action.payload.id_produto
-      })
-
+      }) 
+    })
+    .addCase(deleteProduto.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload
+      state.produto = {}
       state.message = action.payload.message
- 
     })
     .addCase(getAllProdutos.pending, (state) => {
       state.loading = true
       state.error = false
     })
     .addCase(getAllProdutos.fulfilled, (state, action) => {
+      state.loading = false
+      state.success = true
+      state.error = null
+      state.produtos = action.payload 
+    })
+    .addCase(getProdutos.pending, (state) => {
+      state.loading = true
+      state.error = false
+    })
+    .addCase(getProdutos.fulfilled, (state, action) => {
+      state.loading = false
+      state.success = true
+      state.error = null
+      state.produtos = action.payload 
+    })
+    .addCase(getEntrada.pending, (state) => {
+      state.loading = true
+      state.error = false
+    })
+    .addCase(getEntrada.fulfilled, (state, action) => {
+      state.loading = false
+      state.success = true
+      state.error = null
+      state.produtos = action.payload 
+    })
+    .addCase(getSaida.pending, (state) => {
+      state.loading = true
+      state.error = false
+    })
+    .addCase(getSaida.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
       state.error = null
@@ -145,7 +202,6 @@ export const produtoSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.produtos.findIndex(produto => produto.id_produto === action.payload.produto.id_produto);
       if (index !== -1) {
