@@ -102,10 +102,10 @@ export default function MaisVendidosEmpresa() {
                   key={index}
                   className="grid grid-cols-3 p-2 border-b-2 border-black"
                 >
-                  <label htmlFor="" className="text-center">
+                  <label htmlFor="" className="text-left">
                     {empresa.Produto}
                   </label>
-                  <label htmlFor="" className="text-right">
+                  <label htmlFor="" className="text-center">
                     {empresa.Quantidade} UN
                   </label>
                   <label htmlFor="" className="text-right">

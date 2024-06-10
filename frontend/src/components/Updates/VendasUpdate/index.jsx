@@ -60,30 +60,26 @@ export default function VendasUpdate() {
         <div className="w-full max-w-5xl h-[30rem] rounded-3xl bg-[#053057] flex flex-col items-center">
           <div className="w-full border-2 border-black bg-white rounded-xl mt-6">
             {/* descrições */}
-            <div className="grid grid-cols-6 p-2 border-b-2 border-black text-xs sm:text-sm md:text-base">
+            <div className="grid grid-cols-5 p-2 border-b-2 border-black text-xs sm:text-sm md:text-base">
               <label className="font-semibold">VENDA Nº</label>
               <label className="font-semibold text-center">DATA GERAÇÃO</label>
               <label className="font-semibold text-center">VALOR DA CONTA</label>
               <label className="font-semibold text-center">VENDEDOR</label>
               <label className="font-semibold text-center">EMPRESA</label>
-              <label className="font-semibold text-center">AÇÕES</label>
             </div>
             {/* list */}
             <div className="h-[300px] overflow-y-auto">
               {vendas.map((venda) => (
                 <div
                   key={venda.id_venda}
-                  className="grid grid-cols-6 p-2 border-b-2 border-black text-xs sm:text-sm md:text-base"
+                  className="grid grid-cols-5 p-2 border-b-2 border-black text-xs sm:text-sm md:text-base"
                 >
                   <label>{venda.id_venda}</label>
                   <label className="text-center">{venda.data}</label>
                   <label className="text-center">R$ {venda.valor_venda}</label>
                   <label className="text-center">{getUsuarioNome(venda.id_usuario)}</label>
                   <label className="text-center">{getEmpresaNome(venda.id_empresa)}</label>
-                  <label className="text-center">
-                    <FontAwesomeIcon icon={faPencil} className="mr-5 cursor-pointer" onClick={() => editarVenda(venda)} />
-                    <FontAwesomeIcon icon={faCancel} color="red" className="cursor-pointer" onClick={() => handleDelete(venda.id_venda)} />
-                  </label>
+                  
                 </div>
               ))}
             </div>
