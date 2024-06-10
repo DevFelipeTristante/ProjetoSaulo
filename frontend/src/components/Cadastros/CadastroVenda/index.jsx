@@ -91,14 +91,22 @@ export default function CadastroVenda() {
 
     setItensPedido([...itensPedido, newItem]);
     setValorVenda(valor_venda + preco_total);
+    
+    // Limpar campos após adicionar item
     setId_produto("");
     setId_tabela("");
     setQuantidade("");
+    setProdutoSelecionado(null);
   };
 
   const handleRemoveItem = (index) => {
-    setItensPedido(itensPedido.filter((_, i) => i !== index));
+    const removedItem = itensPedido[index];
+    const newItensPedido = [...itensPedido];
+    newItensPedido.splice(index, 1);
+    setItensPedido(newItensPedido);
+    setValorVenda(valor_venda - removedItem.preco_total);
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,7 +121,7 @@ export default function CadastroVenda() {
       id_empresa: user.id_empresa,
     };
 
-    console.log("venda:", venda)
+    console.log("venda:", venda);
 
     dispatch(insertVenda(venda)).then((result) => {
       const { id_venda } = result.payload;  // Supondo que o insertVenda retorna o id_venda criado

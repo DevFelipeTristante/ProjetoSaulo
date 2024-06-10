@@ -9,25 +9,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllEmpresas } from "../../../slices/empresaSlice";
 import { getAllUsuarios } from "../../../slices/usuarioSlice";
+import { getAllItems } from "../../../slices/itemSlice";
 import Message from "../../Message/Message";
 
 export default function VendasUpdate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { message,
-    error, vendas } = useSelector((state) => state.venda);
+  const { message, error, vendas } = useSelector((state) => state.venda);
   const { usuarios, loading } = useSelector((state) => state.usuario);
   const { empresas } = useSelector((state) => state.empresa);
+  const { items } = useSelector((state) => state.item);
 
   useEffect(() => {
     dispatch(getAllVendas());
-    dispatch(getAllUsuarios())
+    dispatch(getAllUsuarios());
     dispatch(getAllEmpresas());
+    dispatch(getAllItems());
   }, [dispatch]);
 
   const editarVenda = (venda) => {
-    navigate("/CadastroVenda", { state: { venda  } });
+    // Adicionando itens da venda ao objeto venda
+    const itensVenda = items.filter(item => item.id_venda === venda.id_venda);
+    navigate("/CadastroVenda", { state: { venda, itensVenda } });
   };
 
   const handleDelete = async (id_venda) => {
@@ -45,10 +49,10 @@ export default function VendasUpdate() {
     return empresa ? empresa.nome : "Empresa não encontrada";
   };
 
-  if(loading) {
+  if (loading) {
     return <p>Carregando...</p>;
   }
-  
+
   return (
     <GradientWrapper>
       <HeaderCadsatro label="VENDAS REALIZADAS" />
@@ -86,7 +90,6 @@ export default function VendasUpdate() {
           </div>
         </div>
       </div>
-      
       <BarMenu />
     </GradientWrapper>
   );
