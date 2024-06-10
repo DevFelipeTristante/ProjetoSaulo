@@ -25,8 +25,8 @@ export const insertCompra = createAsyncThunk(
 
 export const deleteCompra = createAsyncThunk(
   "compra/delete",
-  async(_, thunkAPI) => {
-    const data = await compraService.deleteCompra()
+  async(numeroNF, thunkAPI) => {
+    const data = await compraService.deleteCompra(numeroNF)
 
     if(data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0])
@@ -113,8 +113,6 @@ export const compraSlice = createSlice({
       state.compras = state.compras.filter((compra) => {
         return compra.numeroNF !== action.payload.numeroNF
       })
-
-      state.message = action.payload.message
  
     })
     .addCase(getAllCompras.pending, (state) => {
@@ -145,7 +143,6 @@ export const compraSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.message = action.payload.message;
     
       const index = state.compras.findIndex(compra => compra.numeroNF === action.payload.compra.numeroNF);
       if (index !== -1) {

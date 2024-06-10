@@ -23,6 +23,7 @@ const cadastros = [
   { rotulo: "Cadastro de Categorias", caminho: "/CadastroCategoria" },
   { rotulo: "Cadastro de Cidades", caminho: "/CadastroCidade" },
   { rotulo: "Cadastro de Clientes", caminho: "/CadastroClientes" },
+  { rotulo: "Cadastro de Compra Produto", caminho: "/CadastroCompra" },
   { rotulo: "Cadastro de Empresa", caminho: "/CadastroEmpresa" },
   { rotulo: "Cadastro de Fornecedores", caminho: "/CadastroFornecedor" },
   { rotulo: "Cadastro de Produtos", caminho: "/CadastroProduto" },
@@ -31,7 +32,12 @@ const cadastros = [
 ];
 
 export default function InicialPage() {
-  const { auth } = useAuth();
+  const {auth} = useAuth()
+
+  const user = JSON.parse(localStorage.getItem('usuario'));
+  const id_perfil = user ? user.id_perfil : null;
+
+  console.log(id_perfil);
 
   const dispatch = useDispatch();
 
@@ -42,6 +48,13 @@ export default function InicialPage() {
   };
 
   const { loading } = useSelector((state) => state.usuario);
+
+  const cadastrosFiltrados = cadastros.filter((item) => {
+    if (id_perfil === 2) {
+      return item.rotulo === "Vendas" || item.rotulo === "Cadastro de Clientes";
+    }
+    return true;
+  });
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -65,7 +78,7 @@ export default function InicialPage() {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="space-y-2 bg-black">
-            {cadastros.map((item, index) => (
+            {cadastrosFiltrados.map((item, index) => (
               <DropdownMenuItem key={index} className="font-bold text-white">
                 <Link to={item.caminho}>{item.rotulo}</Link>
               </DropdownMenuItem>

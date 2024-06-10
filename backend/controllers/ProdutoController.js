@@ -6,6 +6,14 @@ const connection = require('../config/connection');
 const insertProduto = async (req, res) => {
   const { descricao_produto, id_categoria, id_tabela, qtd_estoque } = req.body;
 
+    // Verificar se o usuário existe
+    const produto = await Produto.findOne({ where: { descricao_produto } });
+
+    if (produto) {
+      res.status(422).json({ errors: ['Por favor, utilize outro nome de produto'] });
+      return;
+    }
+
   try {
     const novoProduto = await Produto.create({
       descricao_produto, id_categoria, id_tabela, qtd_estoque

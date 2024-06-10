@@ -149,6 +149,7 @@ export default function CadastroEmpresa() {
               placeholder="Escreva o CNPJ aqui (apenas números)"
               className="w-full"
               value={cnpj}
+              minLength={14}
               maxLength={14}
               onChange={(e) => {
                 if (e.target.value.length <= 14) {

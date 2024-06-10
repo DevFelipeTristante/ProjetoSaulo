@@ -14,11 +14,11 @@ const insertCompra = async(data) => {
   }
 }
 
-const deleteCompra = async() => {
+const deleteCompra = async(numeroNF) => {
   const config = requestConfig("DELETE", null)
 
   try {
-    const res = await fetch(api + "/compra/delete", config)
+    const res = await fetch(api + "/compra/delete/" + numeroNF, config)
       .then((res) => res.json())
       .catch((err) => err)
 

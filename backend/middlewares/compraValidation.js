@@ -7,7 +7,7 @@ const insertCompraValidation = () => {
       .withMessage("O Número da Nota Fiscal é obrigatório e deve ser um inteiro maior ou igual a 1."),
     body("valor")
       .isFloat({ min: 0.01 })
-      .withMessage("O valor da parcela é obrigatório e deve ser numérico e maior que zero."),
+      .withMessage("O valor da nota é obrigatório e deve ser numérico e maior que zero."),
     body("quantidade")
       .isInt({ min: 1 })
       .withMessage("A quantidade de parcelas é obrigatória e deve ser um inteiro maior ou igual a 1."),
@@ -29,7 +29,7 @@ const updateCompraValidation = () => {
     body("valor")
       .optional()
       .isFloat({ min: 0.01 })
-      .withMessage("O valor da parcela deve ser numérico e maior que zero."),
+      .withMessage("O valor da nota deve ser numérico e maior que zero."),
     body("quantidade")
       .optional()
       .isInt({ min: 1 })

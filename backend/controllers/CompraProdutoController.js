@@ -28,7 +28,7 @@ const getAllCompras = async (req, res) => {
 }
 
 const deleteCompra = async (req, res) => {
-  const { numeroNF } = req.body;
+  const { numeroNF } = req.params;
 
   try {
     const compra = await CompraProduto.findByPk(numeroNF);
